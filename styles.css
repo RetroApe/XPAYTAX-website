@@ -1,0 +1,177 @@
+:root {
+    /* Fonts */
+    --font-primary: 'Prompt', sans-serif; /* Primary font */
+    --font-secondary: 'Domine', sans-serif; /* Secondary font */
+    --font-accent: 'Josefin Slab', serif; /* Accent font */
+
+    /* Colors */
+    --color-accent: #ebbc52; /* Accent color (e.g., alerts, call-to-actions) */
+    --color-background-white: #fef9ff; /* Background color */
+    --color-background-dark: #1A4D66; /* Surface color (e.g., cards, headers) */
+    --color-text: #223847; /* Primary text color */
+    --color-text-muted: #478ea8; /* Muted text color */
+
+    /* Sizings (divisible by 4) */
+    --sizing-xxs: 4px;
+    --sizing-xsm: 8px;
+    --sizing-sm: 16px;
+    --sizing-md: 24px;
+    --sizing-lg: 32px;
+    --sizing-xl: 48px;
+    --sizing-xxl: 64px;
+    --site-margins: 104px;
+
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+
+    /* Shadows */
+    --box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25);
+
+    /* Transitions */
+    --transition-duration: 0.3s;
+    --transition-easing: ease-in-out;
+
+    /* Z-index Layers */
+    --z-index-header: 1000;
+    --z-index-modal: 1100;
+    --z-index-tooltip: 1200;
+}
+
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+  color: var(--color-text);
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+p {
+    font-family: var(--font-secondary);
+}
+
+.flex {
+    display: flex;
+}
+
+button {
+    font-family: var(--font-accent);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: var(--color-text);
+    background-color: var(--color-accent);
+    border: 0;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+}
+
+#hero {
+    background-color: var(--color-background-dark);
+    
+}
+
+#hero > div {
+  position: relative;
+  align-items: center;
+  padding: var(--sizing-xl) 0;
+  overflow: hidden;
+}
+
+.item1 {
+}
+
+.item2 {
+    position: relative;
+    left: calc(-100px );
+    margin-right: -100px;
+    flex-shrink: 0;
+}
+
+.item3 {
+  align-self: stretch;
+}
+
+#hero .polygon {
+    /* width: 820px; */
+    /* min-height: 586.5px; */
+    background-color: var(--color-background-white);
+    clip-path: polygon( 97.993% 0.085%,-3.47% 0.085%,-3.47% 0.085%,-3.791% 0.121%,-4.096% 0.224%,-4.381% 0.389%,-4.641% 0.611%,-4.872% 0.884%,-5.07% 1.201%,-5.231% 1.558%,-5.351% 1.949%,-5.426% 2.369%,-5.452% 2.811%,-5.452% 97.274%,-5.452% 97.274%,-5.426% 97.716%,-5.351% 98.136%,-5.231% 98.527%,-5.07% 98.884%,-4.872% 99.202%,-4.641% 99.474%,-4.381% 99.696%,-4.096% 99.861%,-3.791% 99.964%,-3.47% 100%,65.717% 100%,65.717% 100%,65.945% 99.982%,66.168% 99.929%,66.382% 99.842%,66.587% 99.724%,66.78% 99.575%,66.96% 99.398%,67.125% 99.193%,67.273% 98.963%,67.403% 98.709%,67.512% 98.433%,99.788% 3.97%,99.788% 3.97%,99.927% 3.422%,99.978% 2.872%,99.947% 2.334%,99.841% 1.821%,99.667% 1.35%,99.431% 0.932%,99.138% 0.583%,98.797% 0.316%,98.413% 0.145%,97.993% 0.085% );
+    padding: var(--site-margins);
+    padding-right: 0px;
+}
+
+h1 {
+    font-size: 4rem;
+    letter-spacing: -1px;
+    line-height: 110%;
+    margin-bottom: 3rem;
+    padding-right: 4rem;
+}
+
+#hero p {
+    font-size: 1.375rem;
+    margin-bottom: 5rem;
+    padding-right: 200px;
+    width: 100%;
+}
+
+#hero img {
+    height: 614.8px;
+}
+
+.reverse {
+    transform: scale(-1);
+    width: 820px;
+    height: 87%;
+    position: absolute;
+    top: var(--sizing-xl);
+    left: 1450px;
+    margin-left: -180px;
+}
