@@ -110,6 +110,36 @@ button {
     border: 0;
     border-radius: 8px;
     padding: 0.75rem 2rem;
+    flex-shrink: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px var(--site-margins);
+
+  & a {
+    flex-shrink: 0;
+  }
+  & img {
+      width: 200px;
+  }
+
+  & ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 48px;
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-text);
+
+    & a {
+      text-decoration: none;
+    }
+  }
 }
 
 #hero {
@@ -136,6 +166,10 @@ button {
 
 .item3 {
   align-self: stretch;
+}
+
+.shadow {
+  filter: drop-shadow(8px 8px 16px rgba(0, 0, 0, 0.25));
 }
 
 #hero .polygon {
@@ -166,10 +200,11 @@ h1 {
     height: 614.8px;
 }
 
-.reverse {
-    transform: scale(-1);
+#hero .reverse-polygon {
     width: 820px;
-    height: 87%;
+    /* height: 87%; */
+    background-color: var(--color-background-white);
+    clip-path: polygon( 1.984% 100%,111.642% 100%,111.642% 100%,111.96% 99.964%,112.262% 99.861%,112.543% 99.696%,112.8% 99.474%,113.029% 99.202%,113.225% 98.884%,113.384% 98.527%,113.503% 98.136%,113.577% 97.716%,113.603% 97.274%,113.603% 2.811%,113.603% 2.811%,113.577% 2.369%,113.503% 1.949%,113.384% 1.558%,113.225% 1.201%,113.029% 0.884%,112.8% 0.611%,112.543% 0.389%,112.262% 0.224%,111.96% 0.121%,111.642% 0.085%,33.905% 0.085%,33.905% 0.085%,33.679% 0.103%,33.459% 0.156%,33.247% 0.243%,33.045% 0.361%,32.853% 0.51%,32.675% 0.687%,32.512% 0.892%,32.366% 1.122%,32.238% 1.376%,32.13% 1.652%,0.21% 96.115%,0.21% 96.115%,0.072% 96.663%,0.022% 97.213%,0.052% 97.752%,0.157% 98.264%,0.329% 98.736%,0.563% 99.153%,0.852% 99.503%,1.19% 99.77%,1.569% 99.94%,1.984% 100% );
     position: absolute;
     top: var(--sizing-xl);
     left: 1450px;
