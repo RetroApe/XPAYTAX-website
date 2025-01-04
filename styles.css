@@ -170,10 +170,11 @@ nav {
       text-decoration: none;
     }
   }
+}
 
-  & button {
-    background-color: var(--color-text-muted);
-  }
+nav button {
+  background-color: var(--color-text-muted);
+  color: var(--color-background-white);
 }
 
 #hero {
@@ -260,6 +261,7 @@ h1 {
 
 .img-wrap {
   align-self: center;
+  max-width: 600px;
 }
 
 .text-wrap {
