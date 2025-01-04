@@ -138,12 +138,20 @@ button {
 .breaker {
   height: var(--sizing-xl);
   background-color: var(--color-background-white);
+
+  &.invert {
+    background-color: var(--color-background-dark);
+    box-shadow: inset var(--box-shadow);
+  }
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   padding: 16px var(--site-margins);
+  background-color: var(--color-background-white);
+  box-shadow: inset 0 -4px 2px #25abcc;
+  
 
   & a {
     flex-shrink: 0;
@@ -179,7 +187,7 @@ nav button {
 
 #hero {
     background-color: var(--color-background-dark);
-    
+    box-shadow: inset var(--box-shadow);
 }
 
 #hero > div {
@@ -335,6 +343,41 @@ h3 + ul {
 
   & button {
     align-self: center;
-    margin-top: var(--sizing-xxl);
+    margin: 128px 0 var(--sizing-xxl) 0;
+  }
+}
+
+#benefits {
+  padding: 128px var(--site-margins);
+  background-color: var(--color-background-white);
+
+  & h2 {
+    padding-bottom: var(--sizing-xxl);
+    text-align: center;
+  }
+
+  & img {
+    max-width: 128px;
+    margin-bottom: var(--sizing-md);
+  }
+
+  & h3 {
+    padding-bottom: var(--sizing-xsm);
+  }
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns of equal width */
+  grid-template-rows: repeat(3, 1fr);   /* 3 rows of equal height */
+  gap: 36px; /* Space between grid items */
+}
+
+#contact-form {
+  background-color: var(--color-background-dark);
+
+  & h2 {
+    background-color: var(--color-background-white);
   }
 }
