@@ -170,6 +170,10 @@ nav {
       text-decoration: none;
     }
   }
+
+  & button {
+    background-color: var(--color-text-muted);
+  }
 }
 
 #hero {
@@ -321,4 +325,14 @@ p + p {
 
 h3 + ul {
   margin-top: var(--sizing-sm);
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+
+  & button {
+    align-self: center;
+    margin-top: var(--sizing-xxl);
+  }
 }
