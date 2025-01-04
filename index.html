@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.jss"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
     <header>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="item2"><img src="assets/images/heroImage_noBG.png" alt="main hero image of XPAYTAX logo with icons"></div>
                 <div class="item3">
-                    <div class="">
+                    <div class="shadow">
                         <div class="reverse-polygon"></div> 
                     </div>
                 </div>
@@ -61,62 +61,113 @@
             
         </section>
 
+        <div class="breaker"></div>
+
         <section id="intro">
-            <h2>Each Complicated problem has a simple solution</h2>
-            <p>Let’s face it, a lot of accounting services feel overwhelming and impersonal. From tax preparation to bookkeeping and financial strategy, XPAYTAX ensures every service is crafted to save you time, money, and headaches—so you can focus on growing your business.<p>
-                <p>A lot of accounting services focus on numbers but forget the people behind them. This leads to confusing processes, missed opportunities to save money, and a lack of real support. Our no-nonsense approach ensures your finances are handled with precision and care, while giving you the clarity and empowerment you deserve.</p>
+            <div class="flex">
+                <div class="side-margin-block"></div>
+                <div class="img-wrap">
+                    <img src="assets/images/problem-solution_01a.png" alt="problem solution depiction">
+                </div>
+                <div class="text-wrap flex">
+                    <div>
+                        <h2>Each Complicated problem has a simple solution</h2>
+                        <p>Let’s face it, a lot of accounting services feel overwhelming and impersonal. From tax preparation to bookkeeping and financial strategy, XPAYTAX ensures every service is crafted to save you time, money, and headaches—so you can focus on growing your business.<p>
+                        <p>A lot of accounting services focus on numbers but forget the people behind them. This leads to confusing processes, missed opportunities to save money, and a lack of real support. Our no-nonsense approach ensures your finances are handled with precision and care, while giving you the clarity and empowerment you deserve.</p>
+                    </div>
+                    <button>get to know us</button>
+                </div>
+            </div>
         </section>
 
         <section id="services">
-            <h2>Accounting Services</h2>
 
-            <img src="assets/icons/services/core_accounting.png" alt="core accounting and tax icon">
-            <h3>Core Accounting and Tax</h3>
-            <ul>
-                <li>Tax Preparation and Filing</li>
-                <li>Bookkeeping</li>
-                <li>Financial Statement Preparation</li>
-                <li>Payroll Management</li>
-            </ul>
+            <div class="side-margin-block left"></div>
 
-            <img src="assets/icons/services/financial_planing.png" alt="Financial Planning and Strategy icon">
-            <h3>Financial Planning and Strategy</h3>
-            <ul>
-                <li>Tax Strategy and Consulting</li>
-                <li>Budgeting and Forecasting</li>
-                <li>Reinvestment and Growth Advisory</li>
-                <li>Business Formation Consulting</li>
-            </ul>
+            <div class="middle">
+                <h2>Accounting Services</h2>
 
-            <img src="assets/icons/services/client_support.png" alt="Client Support icon">
-            <h3>Client Support</h3>
-            <ul>
-                <li>Monthly or Quarterly Check-Ins</li>
-                <li>On-Demand Consulting</li>
-                <li>Document Organization and Filing</li>
-            </ul>
+                <div class="flex">
+                    <img src="assets/icons/services/core_accounting.png" alt="core accounting and tax icon">
+                
+                    <div class="item">
+                        <h3>Core Accounting and Tax</h3>
+                        <ul>
+                            <li>Tax Preparation and Filing</li>
+                            <li>Bookkeeping</li>
+                            <li>Financial Statement Preparation</li>
+                            <li>Payroll Management</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="flex">
+                    <img src="assets/icons/services/financial_planing.png" alt="Financial Planning and Strategy icon">
+                    <div class="item">
+                        <h3>Financial Planning and Strategy</h3>
+                        <ul>
+                            <li>Tax Strategy and Consulting</li>
+                            <li>Budgeting and Forecasting</li>
+                            <li>Reinvestment and Growth Advisory</li>
+                            <li>Business Formation Consulting</li>
+                        </ul>
+                    </div>
+                </div>
 
-            <img src="assets/icons/services/specialized_services.png" alt="specialized services icon">
-            <h3>Specialized Services</h3>
-            <ul>
-                <li>Financial Clean-Up</li>
-                <li>Crisis Accounting</li>
-                <li>Digital Transformation of Finances</li>
-            </ul>
 
-            <img src="assets/icons/services/services_entrepreneurs.png" alt="Tailored Services for Entrepreneurs icon">
-            <h3>Tailored Services for Entrepreneurs</h3>
-            <ul>
-                <li>Freelancer and Gig Worker Support</li>
-                <li>Startup Accounting Packages</li>
-            </ul>
+                <div class="flex">
+                    <img src="assets/icons/services/client_support.png" alt="Client Support icon">
+                    <div class="item">
+                        <h3>Client Support</h3>
+                        <ul>
+                            <li>Monthly or Quarterly Check-Ins</li>
+                            <li>On-Demand Consulting</li>
+                            <li>Document Organization and Filing</li>
+                        </ul>
+                    </div>
+                </div>
 
-            <img src="assets/icons/services/educational_services.png" alt="Educational Services icon">
-            <h3>Educational Services</h3>
-            <ul>
-                <li>Workshops and Training</li>
-                <li>One-on-One Financial Coaching</li>
-            </ul>
+
+                <div class="flex">
+                    <img src="assets/icons/services/specialized_services.png" alt="specialized services icon">
+                    <div class="item">
+                        <h3>Specialized Services</h3>
+                        <ul>
+                            <li>Financial Clean-Up</li>
+                            <li>Crisis Accounting</li>
+                            <li>Digital Transformation of Finances</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="flex">
+                    <img src="assets/icons/services/services_entrepreneurs.png" alt="Tailored Services for Entrepreneurs icon">
+                    <div class="item">
+                        <h3>Tailored Services for Entrepreneurs</h3>
+                        <ul>
+                            <li>Freelancer and Gig Worker Support</li>
+                            <li>Startup Accounting Packages</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="flex">
+                    <img src="assets/icons/services/educational_services.png" alt="Educational Services icon">
+                    <div class="item">
+                        <h3>Educational Services</h3>
+                        <ul>
+                            <li>Workshops and Training</li>
+                            <li>One-on-One Financial Coaching</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="side-margin-block right"></div>
         </section>
 
         <section id="benefits">
