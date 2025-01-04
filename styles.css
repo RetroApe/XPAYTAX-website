@@ -376,8 +376,103 @@ h3 + ul {
 
 #contact-form {
   background-color: var(--color-background-dark);
+  padding: 128px var(--site-margins);
+  box-shadow: inset var(--box-shadow);
 
   & h2 {
     background-color: var(--color-background-white);
+    width: fit-content;
+    text-align: center;
+    padding: var(--sizing-md) var(--sizing-md);
+    margin: auto;
+    margin-bottom: var(--sizing-xxl);
+    border-radius: var(--border-radius-md);
+    border-left: solid 16px var(--color-accent);
+    border-right: solid 16px var(--color-accent);
+    box-shadow: var(--box-shadow);
+  }
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background-white);
+    padding: var(--sizing-xxl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow);
+  }
+
+  & button {
+    margin-top: var(--sizing-xl);
+  }
+
+  & label {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: var(--color-text);
+  }
+}
+
+.form_info {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sizing-lg);
+  padding-bottom: var(--sizing-xl);
+  /* flex-wrap: wrap; */
+
+}
+
+input {
+  width: 100%;
+  font-size: 1.25rem;
+}
+
+input, textarea {
+  padding: 16px;
+  border-radius: var(--border-radius-md);
+  border: solid 2px var(--color-text-muted);
+  background-color: #d7d7d7;
+}
+
+footer .footer-information {
+  background-color: var(--color-background-white);
+  padding: var(--sizing-lg) calc(var(--site-margins) * 2);
+
+  display: flex;
+  justify-content: space-between;
+
+  & a, .titled {
+    text-decoration: none;
+    font-family: var(--font-primary);
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+
+.site-list, .other-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--sizing-lg) 0;
+}
+
+.copyright {
+  background-color: var(--color-text);
+  padding: 24px var(--site-margins);
+
+  display: flex;
+  justify-content: space-between;
+
+  & p {
+    color: var(--color-background-white);
+    font-family: var(--font-primary);
+  }
+
+  & a {
+    text-decoration: none;
+    font-family: var(--font-primary);
+    color: var(--color-background-white);
   }
 }
