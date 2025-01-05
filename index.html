@@ -14,27 +14,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Nova+Flat&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
     <header>
-        <nav>
-            <a href="#" class="logo">
-                <img src="assets/images/secondary_logo.png" alt="Website Logo">
-            </a>
-
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Blog</a></li>
-            </ul>
-
-            <button>contact us</button>
-        </nav>
+        <div id="navigation"></div>
     </header>
 
     <main>
@@ -46,7 +33,7 @@
                         <div class="polygon">
                             <h1>Maximize Savings,<br>Minimize Stress</h1>
                             <p>Accounting for small businesses and entrepreneurs. <br>Stay organized and focus on growing your business.</p>
-                            <button>contact us</button>
+                            <a href="contact.html"><button>contact us</button></a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +62,7 @@
                         <p>Let’s face it, a lot of accounting services feel overwhelming and impersonal. From tax preparation to bookkeeping and financial strategy, XPAYTAX ensures every service is crafted to save you time, money, and headaches—so you can focus on growing your business.<p>
                         <p>A lot of accounting services focus on numbers but forget the people behind them. This leads to confusing processes, missed opportunities to save money, and a lack of real support. Our no-nonsense approach ensures your finances are handled with precision and care, while giving you the clarity and empowerment you deserve.</p>
                     </div>
-                    <button>get to know us</button>
+                    <a href="about.html"><button>get to know us</button></a>
                 </div>
             </div>
         </section>
@@ -165,7 +152,9 @@
                     </div>
                 </div>
 
-                <button>find out more</button>
+                <a href="services.html">
+                    <button>find out more</button>
+                </a>
 
             </div>
 
@@ -268,26 +257,7 @@
 
     </main>
 
-    <footer>
-        <div class="footer-information">
-            <img src="assets/images/primary_logo.png" alt="XPAYTAX primary logo with title" width="200px">
+    <div id="footer"></div>
 
-            <div class="site-list">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Services</a>
-                <a href="#">Blog</a>
-            </div>
-
-            <div class="other-list">
-                <p class="titled">Contact</p>
-                <p class="titled">Social</p>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 XPAYTAX. All rights reserved.</p>
-            <a href="#">Privacy Policy</a>
-        </div>
-    </footer>
 </body>
 </html>
