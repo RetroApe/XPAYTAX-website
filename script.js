@@ -1,14 +1,20 @@
 'use strict';
 
+var navList;
+var openButton;
+
     // Load navigation
 fetch('nav.html')
     .then(response => response.text())
     .then(data => {
         document.getElementById('navigation').innerHTML = data;
 
-        const navButton = document.getElementsByClassName("nav-button");
-        const navList = document.getElementsByClassName("nav-list");
-        let originalParent = navButton.parentElement; // Store the original parent of navButton
+        const navButton = document.getElementById("nav-button");
+        navList = document.getElementById("nav-list");
+        const navBar = document.getElementById("navbar");
+
+        openButton = document.getElementById("open-sidebar-button");
+
 
         // Function to move the button based on screen width
         function handleResize() {
@@ -20,20 +26,32 @@ fetch('nav.html')
                     listItem.appendChild(navButton);
                     navList.appendChild(listItem);
                 }
+
             } else {
                 // Move navButton back to its original position
                 if (navList.contains(navButton)) {
-                    originalParent.appendChild(navButton);
+                    navBar.appendChild(navButton);
                     const listItem = navList.querySelector(".nav-button:last-child"); // Remove the empty <li>
                     if (listItem) listItem.remove();
                 }
+
+                navList.classList.remove("show");  
+                const overlay = document.getElementById("overlay");
+                overlay.style.display = "none"; 
+
+                navList.removeAttribute('inert');
             }
         }
+
+
+
 
         // Attach the function to the resize event and run it initially
         window.addEventListener("resize", handleResize);
         handleResize(); // Run initially to check current screen size
     });
+
+
 
 // Load footer
 fetch('footer.html')
@@ -41,6 +59,36 @@ fetch('footer.html')
     .then(data => {
         document.getElementById('footer').innerHTML = data;
     });
+
+
+
+
+
+    function openSidebar() {
+        navList.classList.add("show");
+
+        openButton.setAttribute('aria-expanded', 'true');
+
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "block";
+
+        navList.setAttribute('inert', "");
+    }
+
+
+    function closeSidebar() {
+        navList.classList.remove("show");
+
+        openButton.setAttribute('aria-expanded', 'false');
+
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "none";
+
+        navList.removeAttribute('inert');
+    }
+
+;
+
 
 
 
@@ -61,21 +109,13 @@ window.addEventListener('resize', matchHeight);
 
 
 
-const navButton = document.getElementsByClassName("nav-button");
-const navList = document.getElementsByClassName("nav-list")
-
-const listItem = document.createElement("li"); // Create a new <li> element
-listItem.className = "nav-link"; // Optionally, give it the same class as other nav links
-listItem.appendChild(navButton); // Append the navButton to the new <li>
-
-navList.appendChild(listItem); // Add the new <li> to the navList
 
 
 
 var width1 = 1440;
-var width2 = 1000;
-var value1 = 20;
-var value2 = 8;
+var width2 = 320;
+var value1 = 128;
+var value2 = 64;
 
 var clampX;
 var clampY;
