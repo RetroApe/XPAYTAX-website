@@ -744,6 +744,11 @@ input, textarea {
   margin-right: var(--sizing-sm);
 }
 
+#google-map {
+  margin-top: var(--sizing-sm);
+  width: 100%;
+}
+
 .social-footer p {
   margin-top: var(--sizing-lg);
   margin-bottom: var(--sizing-sm);
@@ -773,6 +778,7 @@ input, textarea {
     flex-direction: column;
     align-items: center;
     padding: var(--sizing-lg) calc(var(--site-margins));
+    gap: 0;
   }
 
   .footer-information img {
