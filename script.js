@@ -72,7 +72,7 @@ fetch('footer.html')
         const overlay = document.getElementById("overlay");
         overlay.style.display = "block";
 
-        navList.setAttribute('inert', "");
+        navList.removeAttribute('inert');
     }
 
 
@@ -84,7 +84,7 @@ fetch('footer.html')
         const overlay = document.getElementById("overlay");
         overlay.style.display = "none";
 
-        navList.removeAttribute('inert');
+        navList.setAttribute('inert', "");
     }
 
 ;
