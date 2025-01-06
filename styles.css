@@ -483,9 +483,7 @@ nav button.cta {
   padding: var(--sizing-xl);
   padding-right: var(--site-margins);
   box-shadow: var(--box-shadow);
-}
-
-.text-wrap.flex {
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 
@@ -505,7 +503,7 @@ p + p {
 
 @media screen and (max-width: 800px) {
   #intro .flex {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   #intro .side-margin-block {
@@ -513,7 +511,7 @@ p + p {
   }
 
   #intro .img-wrap {
-    margin-bottom: var(--sizing-lg);
+    margin-top: var(--sizing-lg);
     max-width: 400px;
   }
 
