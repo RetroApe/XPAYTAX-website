@@ -2,6 +2,7 @@
 
 var navList;
 var openButton;
+var navLinks;
 
     // Load navigation
 fetch('nav.html')
@@ -11,8 +12,25 @@ fetch('nav.html')
 
         const navButton = document.getElementById("nav-button");
         navList = document.getElementById("nav-list");
+        navLinks = document.querySelectorAll(".nav-link a");
         const navBar = document.getElementById("navbar");
 
+        const currentPage = window.location.pathname.split("/").pop(); // Get the current page file name
+
+        console.log(currentPage);
+        console.log(navLinks);
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPage) {
+                link.classList.add("active-link"); // Add active class
+                link.setAttribute("aria-current", "page"); // Set aria-current attribute
+            } else {
+                link.classList.remove("active-link"); // Remove active class
+                link.removeAttribute("aria-current"); // Remove aria-current attribute
+            }
+        });
+
+        
         openButton = document.getElementById("open-sidebar-button");
 
 
@@ -64,30 +82,28 @@ fetch('footer.html')
 
 
 
-    function openSidebar() {
-        navList.classList.add("show");
+function openSidebar() {
+    navList.classList.add("show");
 
-        openButton.setAttribute('aria-expanded', 'true');
+    openButton.setAttribute('aria-expanded', 'true');
 
-        const overlay = document.getElementById("overlay");
-        overlay.style.display = "block";
+    const overlay = document.getElementById("overlay");
+    overlay.style.display = "block";
 
-        navList.removeAttribute('inert');
-    }
+    navList.removeAttribute('inert');
+}
 
 
-    function closeSidebar() {
-        navList.classList.remove("show");
+function closeSidebar() {
+    navList.classList.remove("show");
 
-        openButton.setAttribute('aria-expanded', 'false');
+    openButton.setAttribute('aria-expanded', 'false');
 
-        const overlay = document.getElementById("overlay");
-        overlay.style.display = "none";
+    const overlay = document.getElementById("overlay");
+    overlay.style.display = "none";
 
-        navList.setAttribute('inert', "");
-    }
-
-;
+    navList.setAttribute('inert', "");
+}
 
 
 
@@ -104,8 +120,10 @@ function matchHeight() {
 } 
 
 // Run on load and resize
-window.addEventListener('load', matchHeight);
-window.addEventListener('resize', matchHeight);
+if (originalPoly) {
+    window.addEventListener('load', matchHeight);
+    window.addEventListener('resize', matchHeight);
+}
 
 
 
@@ -114,8 +132,8 @@ window.addEventListener('resize', matchHeight);
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 128;
-var value2 = 64;
+var value1 = 64;
+var value2 = 48;
 
 var clampX;
 var clampY;
