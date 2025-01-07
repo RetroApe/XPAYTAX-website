@@ -162,8 +162,8 @@ if (originalPoly) {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 50;
-var value2 = 30;
+var value1 = 200;
+var value2 = 70;
 
 var clampX;
 var clampY;
