@@ -30,7 +30,7 @@ fetch('nav.html')
             }
         });
 
-        
+
         openButton = document.getElementById("open-sidebar-button");
 
 
@@ -108,6 +108,36 @@ function closeSidebar() {
 
 
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+
+    // Show or hide the button based on scroll position
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 500 && (window.innerHeight + window.scrollY + 50) < document.body.offsetHeight) {
+            scrollToTopButton.classList.add("show");
+            scrollToTopButton.removeAttribute('inert');
+        } else {
+            scrollToTopButton.classList.remove("show");
+            scrollToTopButton.setAttribute('inert', "");
+            
+        }
+    });
+
+    // Scroll back to the top when the button is clicked
+    window.scrollToTop = function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+});
+
+
+
+
+
+
 const originalPoly = document.querySelector('.polygon');
 const reversePoly = document.querySelector('.reverse-polygon');
 
@@ -132,8 +162,8 @@ if (originalPoly) {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 64;
-var value2 = 48;
+var value1 = 50;
+var value2 = 30;
 
 var clampX;
 var clampY;
