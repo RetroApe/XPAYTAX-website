@@ -154,9 +154,9 @@ li {
 
 button.cta, a.cta {
     font-family: var(--font-accent);
-    font-size: 1.5rem;
+    font-size: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.5rem);
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: 1px;
     text-align: center;
     color: var(--color-text);
     background-color: var(--color-accent);
@@ -430,6 +430,11 @@ nav a.cta {
 #hero {
     background-color: var(--color-background-dark);
     box-shadow: inset var(--box-shadow);
+
+    & .shadow {
+      filter: drop-shadow(8px 8px 16px rgba(0, 0, 0, 0.25));
+      height: 100%;
+    }
 }
 
 #hero > div {
@@ -445,12 +450,6 @@ nav a.cta {
     margin-right: -100px;
     flex-shrink: 0;
     align-self: center;
-}
-
-
-.shadow {
-  filter: drop-shadow(8px 8px 16px rgba(0, 0, 0, 0.25));
-  height: 100%;
 }
 
 #hero .polygon {
@@ -473,7 +472,7 @@ nav a.cta {
     font-size: clamp(1.125rem, 1.0536rem + 0.3571vw, 1.375rem);
     margin-bottom: 5rem;
     padding-right: clamp(50px, 7.1429px + 13.3929vw, 200px);
-    width: 100%;
+    max-width: 60ch;
 }
 
 #hero img {
@@ -481,16 +480,25 @@ nav a.cta {
 }
 
 #hero.hero_sub-page {
-  & div {
+  & > div {
+    justify-content: space-between;
+  }
+
+  & .polygon {
     justify-content: flex-start;
   }
 
   & img {
-    max-height: 400px;
+    max-height: 350px;
+    margin-top: 32px;
   }
 
   & .item1 {
     max-width: 800px;
+  }
+
+  & .item2 {
+    margin-right: -50px;
   }
 
   & p {
@@ -547,7 +555,19 @@ nav a.cta {
   background-color: var(--color-background-dark);
   padding: var(--sizing-xl) 0;
   box-shadow: inset var(--box-shadow);
+  
+  & .flex {
+    justify-content: space-between;
+  }
 }
+
+/* @media screen and (min-width: 1800px) {
+  #intro .flex {
+    justify-content: space-between;
+  }
+} */
+
+
 
 .side-margin-block {
   background-color: var(--color-background-white);
@@ -559,13 +579,14 @@ nav a.cta {
 
 .img-wrap {
   align-self: center;
-  max-width: 600px;
+  max-width: clamp(300px, -200.0000px + 55.5556vw, 600px);
 }
+
 
 .text-wrap {
   background-color: var(--color-background-white);
   border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-  padding: var(--sizing-xl);
+  padding: var(--sizing-xxl);
   padding-right: var(--site-margins);
   box-shadow: var(--box-shadow);
   display: flex;
@@ -579,6 +600,7 @@ nav a.cta {
 
   & p {
     opacity: 85%;
+    max-width: 66ch;
   }
 }
 
@@ -648,10 +670,6 @@ p + p {
     opacity: 80%;
   }
 
-  & h3 {
-    text-align: center;
-  }
-
 }
 
 #services h2 {
@@ -700,6 +718,10 @@ h3 + ul {
 
   #services .item {
     align-self: stretch;
+  }
+
+  #services h3 {
+    text-align: center;
   }
 }
 
@@ -952,5 +974,52 @@ footer a:hover {
   & a {
     font-family: var(--font-primary);
     color: var(--color-background-white);
+  }
+}
+
+
+
+
+  /* **** */
+ /* TEAM */
+/* **** */
+
+#team {
+  padding: clamp(64px, 45.7143px + 5.7143vw, 128px) var(--site-margins);
+  background-color: var(--color-background-white);
+
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 114.2857px + 26.7857vw, 500px), 1fr)); /* 3 columns of equal width */
+    margin-top: var(--sizing-lg);
+    gap: 48px;
+  }
+
+  h2, h3, p {
+    text-align: center;
+  }
+
+  & .job-title {
+    font-weight: 700;
+  }
+
+  & p {
+    opacity: 80%;
+  }
+
+  & > p {
+    max-width: 60ch;
+    text-align: center;
+    margin-left:  auto;
+    margin-right: auto;
+  }
+
+  & .shadow {
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
+  }
+
+  & img {
+    clip-path: polygon(100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%, 25% 6.7%, 75% 6.7%);
+    
   }
 }

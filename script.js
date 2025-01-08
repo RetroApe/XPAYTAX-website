@@ -4,6 +4,8 @@ var navList;
 var openButton;
 var navLinks;
 
+document.addEventListener("DOMContentLoaded", () => {
+
     // Load navigation
 fetch('nav.html')
     .then(response => response.text())
@@ -16,9 +18,6 @@ fetch('nav.html')
         const navBar = document.getElementById("navbar");
 
         const currentPage = window.location.pathname.split("/").pop(); // Get the current page file name
-
-        console.log(currentPage);
-        console.log(navLinks);
 
         navLinks.forEach(link => {
             if (link.getAttribute("href") === currentPage) {
@@ -71,12 +70,37 @@ fetch('nav.html')
 
 
 
-// Load footer
-fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('footer').innerHTML = data;
-    });
+    // Load footer
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        });
+
+
+
+    // Fetch the content of contact-form.html
+    fetch('contact-form.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to load contact-form.html');
+            }
+            return response.text(); // Parse the response as text
+        })
+        .then(html => {
+            // Find the target element
+            const contactFormSection = document.getElementById('contact-form');
+            
+            if (contactFormSection) {
+                contactFormSection.innerHTML = html; // Insert the fetched HTML content
+            } else {
+                console.error('Target element #navigation not found');
+            }
+        })
+        .catch(error => console.error('Error loading contact-form.html:', error));
+});    
+
+
 
 
 
@@ -161,9 +185,9 @@ if (originalPoly) {
 
 
 var width1 = 1440;
-var width2 = 320;
-var value1 = 200;
-var value2 = 70;
+var width2 = 900;
+var value1 = 600;
+var value2 = 300;
 
 var clampX;
 var clampY;
