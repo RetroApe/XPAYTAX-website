@@ -1,13 +1,15 @@
 <h2>Take Control of Your Finances!</h2>
 
-<form action="#" method="post">
+<form action="#" method="post" onsubmit="handleSubmit()" novalidate>
     <div class="form_info">
         <span>
             <label for="name">Name*</label>
+            <span class="invalid">Required</span>
             <input type="text" id="name" name="name" required>
         </span>
         <span>
             <label for="email">Email*</label>
+            <span class="invalid">Invalid</span>
             <input type="email" id="email" name="email" required>
         </span>
         <span>
@@ -16,8 +18,28 @@
         </span>
     </div>
 
-    <label for="message">Message*</label>
-    <textarea id="message" name="message" rows="4" required></textarea>
+    <span>
+        <label for="message">Message*</label>
+        <span class="invalid">Required</span>
+        <textarea id="message" name="message" rows="4" required></textarea>
+    </span>
 
-    <button class="cta" type="submit">Send Message</button>
+    <button class="cta" type="submit" ">Send Message</button>
+
 </form>
+
+<div id="overlay-form" class="" onclick="dismissMessage()"></div>
+
+<div id="success" class="flex">
+
+    <div class="img-wrap"><img src="assets/icons/email-success.png" alt="email successfully sent icon"></div>
+
+    <h2>Thank you for getting in touch!</h2>
+    
+    <p>Hi <span id="use-client-name"></span>.</p>
+    <p>We will get back in touch with you as soon as possible.</p>
+    <p><span>Have a great day!</span></p>
+    
+    <button class="cta" onclick="dismissMessage()">Close</button>
+
+</div>

@@ -76,29 +76,117 @@ fetch('nav.html')
         .then(data => {
             document.getElementById('footer').innerHTML = data;
         });
+});    
 
 
-
-    // Fetch the content of contact-form.html
+document.addEventListener("DOMContentLoaded", () => {
+    // Fetch the contact form
     fetch('contact-form.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load contact-form.html');
             }
-            return response.text(); // Parse the response as text
+            return response.text();
         })
         .then(html => {
-            // Find the target element
             const contactFormSection = document.getElementById('contact-form');
-            
+
             if (contactFormSection) {
-                contactFormSection.innerHTML = html; // Insert the fetched HTML content
+                contactFormSection.innerHTML = html; // Insert fetched HTML content
+                
+                // Attach form submission handler after content is loaded
+                const form = document.querySelector("form");
+                const overlay = document.getElementById("overlay-form");
+                const successWindow = document.getElementById("success");
+                const emailInput = document.getElementById("email");
+                const nameInput = document.getElementById("name");
+                const messageInput = document.getElementById("message");
+                const useClientName = document.getElementById("use-client-name");
+
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault(); // Prevent default form submission behavior
+
+                    // Helper function to set validity
+                    const setValidity = (input, isValid) => {
+                        const invalidMessage = input.parentElement.querySelector(".invalid");
+                        if (isValid) {
+                            invalidMessage.classList.remove("invalid-show"); // Hide invalid message
+                            input.classList.remove("invalid-show");
+                            input.classList.add("valid-show");
+                        } else {
+                            invalidMessage.classList.add("invalid-show"); // Show invalid message
+                            input.classList.add("invalid-show");
+                            input.classList.remove("valid-show");
+                        }
+                    };
+
+
+                    // Blur event listener
+                    [nameInput, emailInput, messageInput].forEach((input) => {
+                        input.addEventListener("blur", () => {
+                            if (input === emailInput) {
+                                // Validate email
+                                setValidity(emailInput, isValidEmail(emailInput.value));
+                            } else {
+                                // Validate other inputs (name and message)
+                                setValidity(input, !!input.value.trim());
+                            }
+                        });
+                    });
+                    
+
+                    // Validate name input
+                    const isNameValid = !!nameInput.value.trim();
+                    setValidity(nameInput, isNameValid);
+
+                    // Validate email input
+                    const isEmailValid = isValidEmail(emailInput.value);
+                    setValidity(emailInput, isEmailValid);
+
+                    // Validate message input
+                    const isMessageValid = !!messageInput.value.trim();
+                    setValidity(messageInput, isMessageValid);
+
+                    // If any input is invalid, stop submission
+                    if (!isNameValid || !isEmailValid || !isMessageValid) {
+                        return;
+                    }
+
+                    // Set the client's name in the #success window
+                    useClientName.textContent = nameInput.value.trim();
+
+                    // Add the 'show' class to display the overlay and success window
+                    overlay.classList.add("show");
+                    successWindow.classList.add("show");
+                });
+
+                // Dismiss message handler
+                window.dismissMessage = () => {
+                    overlay.classList.remove("show");
+                    successWindow.classList.remove("show");
+                };
             } else {
-                console.error('Target element #navigation not found');
+                console.error('Target element #contact-form not found');
             }
         })
         .catch(error => console.error('Error loading contact-form.html:', error));
-});    
+
+    // Function to validate email
+    function isValidEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+    }
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -184,10 +272,12 @@ if (originalPoly) {
 
 
 
+
+
 var width1 = 1440;
-var width2 = 900;
-var value1 = 600;
-var value2 = 300;
+var width2 = 320;
+var value1 = 8;
+var value2 = 4;
 
 var clampX;
 var clampY;

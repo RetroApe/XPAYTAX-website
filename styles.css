@@ -807,6 +807,12 @@ h3 + ul {
     letter-spacing: 2px;
     color: var(--color-text);
   }
+
+  & textarea {
+    max-width: 100%;
+    min-width: 100%;
+    font-family: var(--font-secondary);
+  }
 }
 
 .form_info {
@@ -816,9 +822,40 @@ h3 + ul {
   padding-bottom: var(--sizing-xl);
 }
 
+form span {
+  position: relative;
+}
 
 input {
   width: 100%;
+  font-family: var(--font-secondary);
+}
+
+.invalid {
+  position: absolute;
+  right: 4px;
+  top: 36px;
+  z-index: 2;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: orangered;
+  font-size: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
+  opacity: 0;
+
+  transition: all 300ms ease-in-out;
+}
+
+span.invalid-show {
+  top: clamp(4px, 2.8571px + 0.3571vw, 8px);
+  opacity: 100%;
+}
+
+input.invalid-show, textarea.invalid-show {
+  border: solid 3px orangered;
+}
+
+.valid-show {
+  border: solid 3px var(--color-accent2);
 }
 
 input, textarea {
@@ -827,9 +864,81 @@ input, textarea {
   border: solid 2px var(--color-text-muted);
   background-color: #d7d7d7;
   font-size: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
+  position: relative;
+  z-index: 3;
 }
 
 
+#success {
+  width: 100%;
+  max-width: 1000px;
+  background-color: var(--color-background-white);
+  padding: var(--sizing-xxl) var(--sizing-sm);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+
+  flex-direction: column;
+  align-items: center;
+
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -45%) scale(0);
+
+  opacity: 0;
+  transition: 
+    transform 400ms ease-in-out,
+    opacity 400ms ease-in;
+
+  &.show {
+    opacity: 100%;
+    transform: translate(-50%, -45%) scale(1);
+  }
+
+  & .img-wrap {
+    background-color: var(--color-background-white);
+    border-radius: var(--border-radius-md);
+    border: solid 5px var(--color-background-white);
+    box-shadow: var(--box-shadow);
+    max-width: clamp(100px, 85.7143px + 4.4643vw, 150px);
+    position: absolute;
+    top: -64px;
+
+  }
+
+  & h2 {
+    margin: var(--sizing-xl) 0;
+  }
+
+  & p {
+    margin: 0;
+    text-align: center;
+    opacity: 80%;
+    font-size: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.5rem);
+    line-height: 1.8;
+
+    & #use-client-name {
+      font-weight: 700;
+    }
+
+    & span:not(#use-client-name) {
+      text-transform: uppercase;
+    }
+  }
+}
+
+#overlay-form {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
 
 
 
@@ -951,9 +1060,6 @@ footer a:hover {
     flex-direction: column;
   }
 
-  .form_info span {
-    width: 100%;
-  }
   
 }
 
