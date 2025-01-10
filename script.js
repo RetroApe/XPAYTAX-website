@@ -108,20 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 form.addEventListener("submit", async (event) => {
                     event.preventDefault(); // Prevent default form submission behavior 
                     
-                    // Helper function to toggle loader visibility
-                    const toggleLoader = (show) => {
-                        if(show) {
-                            overlay.classList.add("show");
-                            loader.classList.add("show");
-                            overlay.removeAttribute("onclick");
-                        } else {
-                            loader.classList.remove("show");
-                            overlay.setAttribute("onclick", "dismissMessage()");
-                        }
-                    };
-
-                    toggleLoader(true);
-                    
                     // Helper function to set validity
                     const setValidity = (input, isValid) => {
                         const invalidMessage = input.parentElement.querySelector(".invalid");
@@ -168,13 +154,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         return;
                     }
 
-                    // Set the client's name in the #success window
+                    
+                    // Helper function to toggle loader visibility
+                    const toggleLoader = (show) => {
+                        if(show) {
+                            overlay.classList.add("show");
+                            loader.classList.add("show");
+                            overlay.removeAttribute("onclick");
+                        } else {
+                            loader.classList.remove("show");
+                            overlay.setAttribute("onclick", "dismissMessage()");
+                        }
+                    };
+
+                    toggleLoader(true);
+
                     
 
                     // Prepare form data
                     const formData = new FormData(form);
-
-
 
                     // Checking/Sending PHP Mail
                     try {

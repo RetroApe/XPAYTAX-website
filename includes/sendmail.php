@@ -28,12 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // If there are errors, redirect back to the form with error messages
     if (!empty($errors)) {
-        header("Location: ../contact-form.html?error=" . urlencode(implode(", ", $errors)));
         exit;
     }
 
     // Email configuration
-    $to = "thunder.thoster@gmail.com"; // Replace with your email address
+    $to = "thunder.thoster@gmail.com";
     $subject = "New Contact Form Submission";
     $body = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
     $headers = "From: $email";
