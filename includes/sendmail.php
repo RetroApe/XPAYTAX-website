@@ -1,18 +1,21 @@
 <?php
 
-// At the top of your PHP file
+$timestamp = date("Y-m-d-H-i-s");
+$logFileName = "php-error-$timestamp.log";
+
 ini_set('log_errors', 1);
-ini_set('error_log', '/path/to/php-error.log'); // Ensure this path is writable
+ini_set('error_log', $logFileName);
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
+error_log("Request method: " . $_SERVER["REQUEST_METHOD"]);
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Sanitize inputs
-    $name = filter_var(trim($_POST["name"]), FILTER_SANITIZE_STRING);
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
-    $phone = filter_var(trim($_POST["phone"]), FILTER_SANITIZE_STRING);
-    $message = filter_var(trim($_POST["message"]), FILTER_SANITIZE_STRING);
+    $name = htmlspecialchars(trim($_POST["name"]), ENT_QUOTES, 'UTF-8');
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL); // Email sanitization remains valid
+    $phone = htmlspecialchars(trim($_POST["phone"]), ENT_QUOTES, 'UTF-8');
+    $message = htmlspecialchars(trim($_POST["message"]), ENT_QUOTES, 'UTF-8');
 
     // Validate required fields
     $errors = [];
@@ -35,7 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $to = "thunder.thoster@gmail.com";
     $subject = "New Contact Form Submission";
     $body = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
-    $headers = "From: $email";
+    $headers =  "From: $email\r\n" .
+                "Reply-To: $email\r\n" .
+                "X-Mailer: PHP/" . phpversion();
 
     // Send the email
     if (mail($to, $subject, $body, $headers)) {
@@ -48,6 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit;
 } else {
     http_response_code(405); // Method not allowed
-    echo "Method Not Allowed";
+    echo json_encode(["success" => false]);
     exit;
 }
