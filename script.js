@@ -98,14 +98,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 const form = document.querySelector("form");
                 const overlay = document.getElementById("overlay-form");
                 const successWindow = document.getElementById("success");
+                const failureWindow = document.getElementById("failure");
                 const emailInput = document.getElementById("email");
                 const nameInput = document.getElementById("name");
                 const messageInput = document.getElementById("message");
-                const useClientName = document.getElementById("use-client-name");
+                const loader = document.getElementById("loader");
+                
 
-                form.addEventListener("submit", (event) => {
-                     // Prevent default form submission behavior
+                form.addEventListener("submit", async (event) => {
+                    event.preventDefault(); // Prevent default form submission behavior 
+                    
+                    // Helper function to toggle loader visibility
+                    const toggleLoader = (show) => {
+                        if(show) {
+                            overlay.classList.add("show");
+                            loader.classList.add("show");
+                            overlay.removeAttribute("onclick");
+                        } else {
+                            loader.classList.remove("show");
+                            overlay.setAttribute("onclick", "dismissMessage()");
+                        }
+                    };
 
+                    toggleLoader(true);
+                    
                     // Helper function to set validity
                     const setValidity = (input, isValid) => {
                         const invalidMessage = input.parentElement.querySelector(".invalid");
@@ -149,24 +165,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // If any input is invalid, stop submission
                     if (!isNameValid || !isEmailValid || !isMessageValid) {
-                        event.preventDefault();
                         return;
                     }
 
                     // Set the client's name in the #success window
-                    useClientName.textContent = nameInput.value.trim();
+                    
 
-                    // Add the 'show' class to display the overlay and success window
-                    overlay.classList.add("show");
-                    successWindow.classList.add("show");
-                    successWindow.removeAttribute("inert");
+                    // Prepare form data
+                    const formData = new FormData(form);
+
+
+
+                    // Checking/Sending PHP Mail
+                    try {
+                        // Send the form data to the PHP script
+                        const response = await fetch("includes/sendmail.php", {
+                            method: "POST",
+                            body: formData,
+                        });
+                        const result = await response.json();
+
+                        toggleLoader(false);
+
+                        if (result.success) {
+                            // Show success window
+                            const useClientName = successWindow.querySelector(".use-client-name");
+                            useClientName.textContent = nameInput.value.trim();
+
+                            successWindow.classList.add("show");
+                            successWindow.removeAttribute("inert");
+                        } else {
+                            // Show failure window
+                            const useClientName = failureWindow.querySelector(".use-client-name");
+                            useClientName.textContent = nameInput.value.trim();
+
+                            failureWindow.classList.add("show");
+                            failureWindow.removeAttribute("inert");
+                        }
+                    } catch (error) {
+                        // Handle network errors
+                        console.error("Error submitting form:", error);
+                        overlay.classList.add("show");
+                        failureWindow.classList.add("show");
+                        failureWindow.removeAttribute("inert");
+                    }
                 });
+
+
+
 
                 // Dismiss message handler
                 window.dismissMessage = () => {
                     overlay.classList.remove("show");
                     successWindow.classList.remove("show");
                     successWindow.setAttribute("inert", "");
+                    failureWindow.classList.remove("show");
+                    failureWindow.setAttribute("inert", "");
                 };
 
                 document.addEventListener('keydown', (event) => {
@@ -284,8 +338,8 @@ if (originalPoly) {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 8;
-var value2 = 4;
+var value1 = 64;
+var value2 = 16;
 
 var clampX;
 var clampY;

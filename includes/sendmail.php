@@ -1,5 +1,12 @@
 <?php
 
+// At the top of your PHP file
+ini_set('log_errors', 1);
+ini_set('error_log', '/path/to/php-error.log'); // Ensure this path is writable
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Sanitize inputs
     $name = filter_var(trim($_POST["name"]), FILTER_SANITIZE_STRING);
@@ -26,18 +33,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Email configuration
-    $to = "your-email@example.com"; // Replace with your email address
+    $to = "thunder.thoster@gmail.com"; // Replace with your email address
     $subject = "New Contact Form Submission";
     $body = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
     $headers = "From: $email";
 
     // Send the email
     if (mail($to, $subject, $body, $headers)) {
-        // Redirect to a success page or add query param for success
-        header("Location: ../contact-form.html?success=true");
+        // Respond with success
+        echo json_encode(["success" => true]);
     } else {
-        // Redirect back with error
-        header("Location: ../contact-form.html?error=Failed to send email. Please try again.");
+        // Respond with failure
+        echo json_encode(["success" => false]);
     }
     exit;
 } else {
