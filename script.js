@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (contactFormSection) {
                 contactFormSection.innerHTML = html; // Insert fetched HTML content
-                
+
                 // Attach form submission handler after content is loaded
                 const form = document.querySelector("form");
                 const overlay = document.getElementById("overlay-form");
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const useClientName = document.getElementById("use-client-name");
 
                 form.addEventListener("submit", (event) => {
-                    event.preventDefault(); // Prevent default form submission behavior
+                     // Prevent default form submission behavior
 
                     // Helper function to set validity
                     const setValidity = (input, isValid) => {
@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // If any input is invalid, stop submission
                     if (!isNameValid || !isEmailValid || !isMessageValid) {
+                        event.preventDefault();
                         return;
                     }
 
@@ -158,13 +159,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Add the 'show' class to display the overlay and success window
                     overlay.classList.add("show");
                     successWindow.classList.add("show");
+                    successWindow.removeAttribute("inert");
                 });
 
                 // Dismiss message handler
                 window.dismissMessage = () => {
                     overlay.classList.remove("show");
                     successWindow.classList.remove("show");
+                    successWindow.setAttribute("inert", "");
                 };
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') dismissMessage()
+                  });
+
             } else {
                 console.error('Target element #contact-form not found');
             }

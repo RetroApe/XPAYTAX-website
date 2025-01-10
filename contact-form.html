@@ -1,16 +1,16 @@
 <h2>Take Control of Your Finances!</h2>
 
-<form action="#" method="post" onsubmit="handleSubmit()" novalidate>
+<form action="includes/sendmail.php" method="POST" novalidate>
     <div class="form_info">
         <span>
             <label for="name">Name*</label>
             <span class="invalid">Required</span>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name">
         </span>
         <span>
             <label for="email">Email*</label>
             <span class="invalid">Invalid</span>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email">
         </span>
         <span>
             <label for="phone">Phone</label> 
@@ -24,7 +24,7 @@
         <textarea id="message" name="message" rows="4" required></textarea>
     </span>
 
-    <button class="cta" type="submit" ">Send Message</button>
+    <button class="cta" type="submit">Send Message</button>
 
 </form>
 
