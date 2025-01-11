@@ -1,5 +1,15 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Include PHPMailer classes
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
+require 'PHPMailer-master/src/Exception.php';
+
+// Set up logging
 $timestamp = date("Y-m-d-H-i-s");
 $logFileName = "php-error-$timestamp.log";
 
@@ -7,47 +17,58 @@ ini_set('log_errors', 1);
 ini_set('error_log', $logFileName);
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
-error_log("Request method: " . $_SERVER["REQUEST_METHOD"]);
-
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Sanitize inputs
     $name = htmlspecialchars(trim($_POST["name"]), ENT_QUOTES, 'UTF-8');
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL); // Email sanitization remains valid
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $phone = htmlspecialchars(trim($_POST["phone"]), ENT_QUOTES, 'UTF-8');
     $message = htmlspecialchars(trim($_POST["message"]), ENT_QUOTES, 'UTF-8');
 
     // Validate required fields
     $errors = [];
     if (empty($name)) {
-        $errors[] = "Name is required.";
+        echo json_encode(["success" => false]);
+        exit;
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Invalid email address.";
+        echo json_encode(["success" => false]);
+        exit;
     }
     if (empty($message)) {
-        $errors[] = "Message is required.";
-    }
-
-    // If there are errors, redirect back to the form with error messages
-    if (!empty($errors)) {
+        echo json_encode(["success" => false]);
         exit;
     }
 
-    // Email configuration
-    $to = "thunder.thoster@gmail.com";
-    $subject = "New Contact Form Submission";
-    $body = "Name: $name\nEmail: $email\nPhone: $phone\n\nMessage:\n$message";
-    $headers =  "From: $email\r\n" .
-                "Reply-To: $email\r\n" .
-                "X-Mailer: PHP/" . phpversion();
+    // Use PHPMailer to send the email
+    $mail = new PHPMailer(true);
 
-    // Send the email
-    if (mail($to, $subject, $body, $headers)) {
-        // Respond with success
+    try {
+        // Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_OFF; // Turn off debugging in production
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'thunder.thoster@gmail.com';
+        $mail->Password = 'yomf dbsl wlrp ltba'; // Use your app password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('thunder.thoster@gmail.com', 'Tomislav');
+        $mail->addAddress('thunder.thoster@gmail.com', 'Tomislav Šuto');
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'New Contact Form Submission';
+        $mail->Body = "<strong>Name:</strong> $name<br><strong>Email:</strong> $email<br><strong>Phone:</strong> $phone<br><strong>Message:</strong><br>$message";
+        $mail->AltBody = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n$message";
+
+        // Send the email
+        $mail->send();
         echo json_encode(["success" => true]);
-    } else {
-        // Respond with failure
+    } catch (Exception $e) {
+        error_log("Mailer Error: " . $mail->ErrorInfo); // Log error for debugging
         echo json_encode(["success" => false]);
     }
     exit;

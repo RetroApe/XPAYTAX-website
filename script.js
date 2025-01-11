@@ -103,10 +103,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 const nameInput = document.getElementById("name");
                 const messageInput = document.getElementById("message");
                 const loader = document.getElementById("loader");
-                
+                const submitButton = form.querySelector("button[type='submit']");
+
+                var isSubmitting = false;
 
                 form.addEventListener("submit", async (event) => {
                     event.preventDefault(); // Prevent default form submission behavior 
+
+                    if (isSubmitting) {
+                        return;
+                    }
+
+                    submitButton.disabled = true;
+                    isSubmitting = true; 
                     
                     // Helper function to set validity
                     const setValidity = (input, isValid) => {
@@ -151,6 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     // If any input is invalid, stop submission
                     if (!isNameValid || !isEmailValid || !isMessageValid) {
+                        submitButton.disabled = false;
+                        isSubmitting = false;
                         return;
                     }
 
@@ -206,6 +217,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         overlay.classList.add("show");
                         failureWindow.classList.add("show");
                         failureWindow.removeAttribute("inert");
+                    } finally {
+                        submitButton.disabled = false;
+                        isSubmitting = false;
                     }
                 });
 
