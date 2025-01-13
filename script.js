@@ -217,9 +217,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         overlay.classList.add("show");
                         failureWindow.classList.add("show");
                         failureWindow.removeAttribute("inert");
+                        toggleLoader(false);
                     } finally {
                         submitButton.disabled = false;
                         isSubmitting = false;
+                        toggleLoader(false);
                     }
                 });
 
@@ -348,10 +350,10 @@ if (originalPoly) {
 
 
 
-var width1 = 1440;
+var width1 = 900;
 var width2 = 320;
-var value1 = 64;
-var value2 = 16;
+var value1 = 200;
+var value2 = 80;
 
 var clampX;
 var clampY;

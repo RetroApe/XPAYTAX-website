@@ -503,7 +503,7 @@ nav a.cta {
 
   & p {
     margin-bottom: 0;
-    padding-right: clamp(70px, 32.8571px + 11.6071vw, 200px);
+    padding-right: clamp(80px, 45.7143px + 10.7143vw, 200px);
   }
 }
 
@@ -542,6 +542,17 @@ nav a.cta {
 
     h1 {
       padding: 0;
+    }
+
+    #hero.hero_sub-page {
+
+      & .item2 {
+        margin-right: 0;
+      }
+
+      & p {
+        padding-right: clamp(80px, 13.7931px + 20.6897vw, 200px);
+      }
     }
 }
 
