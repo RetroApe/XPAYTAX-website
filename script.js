@@ -214,16 +214,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     } catch (error) {
                         // Handle network errors
                         console.error("Error submitting form:", error);
+                        toggleLoader(false);
+                        const useClientName = failureWindow.querySelector(".use-client-name");
                         overlay.classList.add("show");
                         failureWindow.classList.add("show");
                         failureWindow.removeAttribute("inert");
-                        toggleLoader(false);
-                        const useClientName = failureWindow.querySelector(".use-client-name");
                     } finally {
+                        toggleLoader(false);
                         submitButton.disabled = false;
                         isSubmitting = false;
-                        toggleLoader(false);
-                        const useClientName = failureWindow.querySelector(".use-client-name");
                     }
                 });
 
