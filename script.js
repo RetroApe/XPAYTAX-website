@@ -218,10 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         failureWindow.classList.add("show");
                         failureWindow.removeAttribute("inert");
                         toggleLoader(false);
+                        const useClientName = failureWindow.querySelector(".use-client-name");
                     } finally {
                         submitButton.disabled = false;
                         isSubmitting = false;
                         toggleLoader(false);
+                        const useClientName = failureWindow.querySelector(".use-client-name");
                     }
                 });
 
