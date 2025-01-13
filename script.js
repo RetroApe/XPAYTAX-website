@@ -216,6 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         console.error("Error submitting form:", error);
                         toggleLoader(false);
                         const useClientName = failureWindow.querySelector(".use-client-name");
+                        useClientName.textContent = nameInput.value.trim();
+                        
                         overlay.classList.add("show");
                         failureWindow.classList.add("show");
                         failureWindow.removeAttribute("inert");
