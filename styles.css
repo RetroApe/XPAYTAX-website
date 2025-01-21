@@ -796,6 +796,7 @@ h3 + ul {
     border-left: solid 16px var(--color-accent);
     border-right: solid 16px var(--color-accent);
     box-shadow: var(--box-shadow);
+
   }
 
   & form {
@@ -808,7 +809,7 @@ h3 + ul {
   }
 
   & button.cta {
-    margin-top: var(--sizing-xl);
+    margin-top: var(--sizing-md);
   }
 
   & label {
@@ -872,12 +873,56 @@ input.invalid-show, textarea.invalid-show {
 input, textarea {
   padding: 16px;
   border-radius: var(--border-radius-md);
-  border: solid 2px var(--color-text-muted);
+  border: solid 3px var(--color-text-muted);
   background-color: #d7d7d7;
   font-size: clamp(1rem, 0.9286rem + 0.3571vw, 1.25rem);
   position: relative;
   z-index: 3;
+
+  &:focus {
+    border: solid 3px var(--color-accent);
+  }
 }
+
+input:focus-visible, textarea:focus-visible {
+  outline: none
+}
+
+#privacyContent {
+  margin-top: var(--sizing-md);
+
+  position: relative;
+  
+  & input {
+    width: clamp(13px, 11.0000px + 0.6250vw, 20px);
+    height: clamp(13px, 11.0000px + 0.6250vw, 20px);
+    position: absolute;
+    top: 7px; 
+    accent-color: var(--color-accent);
+  }
+
+  & label {
+    display: block;
+    margin-left: clamp(24px, 20.5714px + 1.0714vw, 36px);
+  }
+
+  & label a {
+    color: var(--color-accent2);
+
+    &:hover {
+    color: var(--color-accent);
+    }
+  }
+
+  & p {
+    font-size: 0.865rem;
+    opacity: 80%;
+    margin-left: clamp(24px, 20.5714px + 1.0714vw, 36px);
+    margin-top: 4px;
+  }
+}
+
+
 
 
 #contact-form .form-response {
@@ -1187,5 +1232,209 @@ footer a:hover {
   & img {
     clip-path: polygon(100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%, 25% 6.7%, 75% 6.7%);
     
+  }
+}
+
+
+
+
+
+  /* ******* */
+ /* REVIEWS */
+/* ******* */
+
+#reviews-section {
+  background-color: var(--color-background-white);
+  padding: var(--sizing-xxl) var(--site-margins);
+
+  & h2 {
+    margin-top: var(--sizing-xl);
+  }
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  margin: var(--sizing-lg) auto;
+  position: relative;
+  gap: var(--sizing-lg);
+}
+
+.carousel-item {
+  padding: 20px;
+  background-color: var(--color-background-white);
+  border-radius: var(--border-radius-lg);
+  border: solid 1px var(--color-accent2);
+  max-width: 500px;
+}
+
+.testimonial {
+  color: var(--color-text);
+  opacity: 80%;
+  margin-bottom: 10px;
+  font-style: italic;
+
+  &::before, &::after {
+    content: ' " ';
+  }
+}
+
+.rating {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
+.client-info h4 {
+  margin: 5px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 900px) {
+  .carousel {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #reviews-section h2 {
+    text-align: center;
+  }
+}
+
+
+
+
+  /* *** */
+ /* FAQ */
+/* *** */
+
+#faq {
+  background-color: var(--color-background-white);
+  padding: var(--sizing-xxl) var(--site-margins);
+
+  & h2 {
+    text-align: center;
+    margin-top: var(--sizing-xl);
+  }
+
+  & p {
+    opacity: 80%;
+  }
+}
+
+/* @media screen and (max-width: 400px) {
+  #faq {
+    padding-left: 0;
+    padding-right: 0;
+  }
+} */
+
+.accordion-contain {
+  margin: var(--sizing-lg) auto;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  max-width: 900px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  
+
+  background-color: #d7d7d7;
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 18px;
+  padding-right: 64px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+
+  position: relative;
+
+  &::after {
+    content: "+";
+    font-size: 2.5rem;
+    margin-right: 32px;
+    color: var(--color-text);
+
+    position: absolute;
+    right: 0;
+    top:50%;
+    transform: translateY(-50%);
+  }
+}
+
+.accordion:hover {
+  background-color: #d7d7d777;
+}
+
+.active-faq {
+  border-left: solid 16px var(--color-accent);
+
+  &::after {
+    content: "-";
+  }
+
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  padding: var(--sizing-md);
+  background-color: #ebbc5222;
+  display: none;
+  overflow: hidden;
+  transition: 0.4s;
+  border-left: none 16px var(--color-accent);
+  border-right: none 16px var(--color-accent);
+}
+
+.active-panel {
+  display: block;
+}
+
+
+  /* ******* */
+ /* PRIVACY */
+/* ******* */
+
+#privacy-policy {
+  background-color: var(--color-background-white);
+  display: flex;
+
+  & .side-margin-block {
+    background-color: var(--color-background-dark);
+    box-shadow: inset var(--box-shadow);
+
+    &.right {
+      border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+    }
+  }
+
+  & div:nth-child(2) {
+    padding: var(--sizing-xxl) clamp(16px, -16.0000px + 10.0000vw, 128px);
+  }
+
+  & a {
+    text-decoration: underline;
+  }
+
+  & a:hover {
+    color: var(--color-accent);
+  }
+
+  & ul {
+    margin-top: var(--sizing-sm);
+    margin-bottom: var(--sizing-lg);
+  }
+
+  & hr {
+    margin: var(--sizing-lg) ;
   }
 }

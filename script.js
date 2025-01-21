@@ -350,13 +350,74 @@ if (originalPoly) {
 
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    // Target the placeholder for the carousel
+    const reviewsSection = document.getElementById("reviews-section");
+
+    // Fetch the carousel content from reviews.html
+    fetch("reviews.html")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to load reviews.html");
+            }
+            return response.text();
+        })
+        .then((html) => {
+            // Inject the carousel HTML into the placeholder
+            reviewsSection.innerHTML = html;
+
+            // Add JavaScript functionality for carousel navigation
+            // initializeCarousel();
+        })
+        .catch((error) => {
+            console.error("Error loading reviews.html:", error);
+        });
+});
 
 
 
-var width1 = 900;
+document.addEventListener("DOMContentLoaded", () => {
+    const faq = document.getElementById('faq');
+
+    fetch("faq.html")
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Failed to load faq.html");
+            }
+            return response.text();
+        })
+        .then((html) => {
+            faq.innerHTML = html;
+
+            toggleFAQ();
+        })
+        .catch((error) => {
+            console.error("Error loading faq.html:", error);
+        })
+})
+
+
+function toggleFAQ() {
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active-faq");
+            this.nextElementSibling.classList.toggle("active-panel");
+
+        });
+    }
+}
+
+
+
+
+
+var width1 = 1440;
 var width2 = 320;
-var value1 = 200;
-var value2 = 80;
+var value1 = 36;
+var value2 = 24;
 
 var clampX;
 var clampY;
