@@ -1010,8 +1010,9 @@ input:focus-visible, textarea:focus-visible {
     font-size: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.5rem);
     line-height: 1.8;
 
-    & #use-client-name {
+    & .use-client-name {
       font-weight: 700;
+      opacity: 100%;
     }
 
     & span:not(#use-client-name) {
@@ -1466,11 +1467,19 @@ footer a:hover {
   }
 
   & ul {
-    margin-top: var(--sizing-sm);
+    margin-top: var(--sizing-xsm);
     margin-bottom: var(--sizing-lg);
   }
 
   & hr {
     margin: var(--sizing-lg) ;
+  }
+
+  & h3 {
+    margin-top: var(--sizing-md);
+  }
+
+  & h3 + p {
+    margin-top: var(--sizing-xsm);
   }
 }

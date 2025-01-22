@@ -24,6 +24,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $phone = htmlspecialchars(trim($_POST["phone"]), ENT_QUOTES, 'UTF-8');
     $message = htmlspecialchars(trim($_POST["message"]), ENT_QUOTES, 'UTF-8');
+    $privacyCheck = isset($_POST["privacy-check"]) ? 'Agreed' : 'Not Agreed';
+
+    // Capture the IP address
+    $ip = $_SERVER['REMOTE_ADDR'];
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
+    }
+
+    // Validate IP address
+    if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+        $ip = "Invalid IP Address";
+    }
 
     // Validate required fields
     $errors = [];
@@ -36,6 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
     if (empty($message)) {
+        echo json_encode(["success" => false]);
+        exit;
+    }
+    if ($privacyCheck === 'Not Agreed') {
         echo json_encode(["success" => false]);
         exit;
     }
@@ -55,14 +73,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('thunder.thoster@gmail.com', 'Tomislav');
-        $mail->addAddress('thunder.thoster@gmail.com', 'Tomislav Šuto');
+        $mail->setFrom('thunder.thoster@gmail.com', 'XPAYTAX');
+        $mail->addAddress('thunder.thoster@gmail.com', 'Tomislav Suto');
+        $mail->addReplyTo($email, $name); // User's email and name in Reply-To
 
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'New Contact Form Submission';
-        $mail->Body = "<strong>Name:</strong> $name<br><strong>Email:</strong> $email<br><strong>Phone:</strong> $phone<br><strong>Message:</strong><br>$message";
-        $mail->AltBody = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n$message";
+        $mail->Subject = "Contact Form Submission - $name";
+        $mail->Body = "
+            <strong>Name:</strong> $name<br>
+            <strong>Email:</strong> $email<br>
+            <strong>Phone:</strong> $phone<br>
+            <strong>Privacy Policy:</strong> $privacyCheck<br>
+            <strong>IP Address:</strong> $ip<br>
+            <strong>Message:</strong><br>$message
+        ";
+        $mail->AltBody = "
+            Name: $name\n
+            Email: $email\n
+            Phone: $phone\n
+            Privacy Policy Agreement: $privacyCheck\n
+            IP Address: $ip\n
+            Message:\n$message
+        ";
 
         // Send the email
         $mail->send();
