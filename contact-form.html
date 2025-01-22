@@ -1,3 +1,8 @@
+<div class="little-title">
+    <span></span>
+    <p>Contact Form</p>
+    <span></span>
+</div>
 <h2>Take Control of Your Finances!</h2>
 
 <form action="includes/sendmail.php" method="POST" novalidate>
@@ -24,9 +29,10 @@
         <textarea id="message" name="message" rows="4" required></textarea>
     </span>
 
-    <span id="privacyContent">
-        <input type="checkbox" id="privacyCheck" name="privacyCheck" required>
-        <label for="privacyCheck">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
+    <span id="privacy-content">
+        <span class="invalid"></span>
+        <input type="checkbox" id="privacy-check" name="privacy-check" required>
+        <label for="privacy-check">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
         <p>We will use your contact data solely to respond to your inquiry.</p>
     </span>
 

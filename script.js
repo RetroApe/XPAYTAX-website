@@ -101,14 +101,55 @@ document.addEventListener("DOMContentLoaded", () => {
                 const failureWindow = document.getElementById("failure");
                 const emailInput = document.getElementById("email");
                 const nameInput = document.getElementById("name");
+                const privacyInput = document.getElementById("privacy-check");
                 const messageInput = document.getElementById("message");
                 const loader = document.getElementById("loader");
                 const submitButton = form.querySelector("button[type='submit']");
 
                 var isSubmitting = false;
 
+                // Function to validate email
+                function isValidEmail(email) {
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    return emailRegex.test(email);
+                }
+
+                // Helper function to set validity
+                const setValidity = (input, isValid) => {
+                    const invalidMessage = input.parentElement.querySelector(".invalid");
+                    if (isValid) {
+                        invalidMessage.classList.remove("invalid-show"); // Hide invalid message
+                        input.classList.remove("invalid-show");
+                        input.classList.add("valid-show");
+                    } else {
+                        invalidMessage.classList.add("invalid-show"); // Show invalid message
+                        input.classList.add("invalid-show");
+                        input.classList.remove("valid-show");
+                    }
+                };
+
+                // Blur event listener
+                [nameInput, emailInput, messageInput].forEach((input) => {
+                    input.addEventListener("blur", () => {
+                        if (input === emailInput) {
+                            // Validate email
+                            setValidity(emailInput, isValidEmail(emailInput.value));
+                        } else {
+                            // Validate other inputs (name and message)
+                            setValidity(input, !!input.value.trim());
+                        }
+                    });
+                });
+
+                // Add change event listener for the checkbox
+                privacyInput.addEventListener("change", () => {
+                    // Validate the checkbox
+                    setValidity(privacyInput, privacyInput.checked);
+                });
+
+
                 form.addEventListener("submit", async (event) => {
-                    event.preventDefault(); // Prevent default form submission behavior 
+                    event.preventDefault();
 
                     if (isSubmitting) {
                         return;
@@ -116,35 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     submitButton.disabled = true;
                     isSubmitting = true; 
-                    
-                    // Helper function to set validity
-                    const setValidity = (input, isValid) => {
-                        const invalidMessage = input.parentElement.querySelector(".invalid");
-                        if (isValid) {
-                            invalidMessage.classList.remove("invalid-show"); // Hide invalid message
-                            input.classList.remove("invalid-show");
-                            input.classList.add("valid-show");
-                        } else {
-                            invalidMessage.classList.add("invalid-show"); // Show invalid message
-                            input.classList.add("invalid-show");
-                            input.classList.remove("valid-show");
-                        }
-                    };
-
-
-                    // Blur event listener
-                    [nameInput, emailInput, messageInput].forEach((input) => {
-                        input.addEventListener("blur", () => {
-                            if (input === emailInput) {
-                                // Validate email
-                                setValidity(emailInput, isValidEmail(emailInput.value));
-                            } else {
-                                // Validate other inputs (name and message)
-                                setValidity(input, !!input.value.trim());
-                            }
-                        });
-                    });
-                    
 
                     // Validate name input
                     const isNameValid = !!nameInput.value.trim();
@@ -158,8 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     const isMessageValid = !!messageInput.value.trim();
                     setValidity(messageInput, isMessageValid);
 
+                    // Initial validation of checkbox
+                    const isPrivacyValid = privacyInput.checked;
+                    setValidity(privacyInput, isPrivacyValid);
+
                     // If any input is invalid, stop submission
-                    if (!isNameValid || !isEmailValid || !isMessageValid) {
+                    if (!isNameValid || !isEmailValid || !isMessageValid || !isPrivacyValid) {
                         submitButton.disabled = false;
                         isSubmitting = false;
                         return;
@@ -249,12 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
         .catch(error => console.error('Error loading contact-form.html:', error));
-
-    // Function to validate email
-    function isValidEmail(email) {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailRegex.test(email);
-    }
 });
 
 
@@ -416,8 +426,8 @@ function toggleFAQ() {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 36;
-var value2 = 24;
+var value1 = 27;
+var value2 = 18;
 
 var clampX;
 var clampY;

@@ -152,6 +152,27 @@ li {
     display: flex;
 }
 
+.little-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--sizing-sm);
+
+  & span {
+    display: inline-block;
+    width: var(--sizing-xxl);
+    height: 4px;
+    background-color: var(--color-accent);
+  }
+
+  & p {
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-weight: 900;
+    margin: 0 var(--sizing-sm);
+  }
+}
+
 button.cta, a.cta {
     font-family: var(--font-accent);
     font-size: clamp(1.125rem, 1.0179rem + 0.5357vw, 1.5rem);
@@ -888,7 +909,7 @@ input:focus-visible, textarea:focus-visible {
   outline: none
 }
 
-#privacyContent {
+#privacy-content {
   margin-top: var(--sizing-md);
 
   position: relative;
@@ -922,7 +943,21 @@ input:focus-visible, textarea:focus-visible {
   }
 }
 
+#privacy-content .invalid {
+  opacity: 1;
+  width: clamp(13px, 11.0000px + 0.6250vw, 20px);
+  height: clamp(13px, 11.0000px + 0.6250vw, 20px);
+  position: absolute;
+  top: 7px;
+  left: 0;
+  background-color: orangered;
+  border-radius: var(--border-radius-sm);
+  transform: scale(0.99);
+}
 
+#privacy-content .invalid.invalid-show {
+  transform: scale(1.5);
+}
 
 
 #contact-form .form-response {
@@ -1245,6 +1280,7 @@ footer a:hover {
 
 #reviews-section {
   background-color: var(--color-background-white);
+  background-color: #d7d7d777;
   padding: var(--sizing-xxl) var(--site-margins);
 
   & h2 {
