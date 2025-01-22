@@ -801,10 +801,13 @@ h3 + ul {
  /* FORM */
 /* **** */
 
+
 #contact-form {
   background-color: var(--color-background-dark);
   padding: clamp(82px, 68.8571px + 4.1071vw, 128px) var(--site-margins);
   box-shadow: inset var(--box-shadow);
+
+  position: relative;
 
   & h2 {
     background-color: var(--color-background-white);
@@ -847,6 +850,117 @@ h3 + ul {
     font-family: var(--font-secondary);
   }
 }
+
+
+
+.grecaptcha-badge {
+  display: none !important;
+}
+
+.recaptcha-flag {
+  width: 60px;
+  height: 70px;
+  position: absolute;
+  top:0;
+  
+  box-shadow: 5px 5px 10px hsl(204, 35%, 16%);
+  border-bottom-right-radius: var(--border-radius-md);
+  border-bottom-left-radius: var(--border-radius-md);
+
+
+  & > div:first-child {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background-white);
+    border-top: solid 3px var(--color-background-dark);
+    border-bottom-right-radius: var(--border-radius-md);
+    border-bottom-left-radius: var(--border-radius-md);
+    box-shadow: 2px 0px 1px  hsl(204, 35%, 16%);
+
+    position: absolute;
+    top: 0;
+    z-index: 2;
+
+    &::before {
+      content: url(https://www.gstatic.com/recaptcha/api2/logo_48.png);
+      background-repeat: no-repeat;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -45%);
+    }
+  }
+  & > div:nth-child(2) {
+    position: absolute;
+    width: 220px;
+    height: 90%;
+    overflow-x: clip;
+    top: 50%;
+    left: 98%;
+    transform-origin: left;
+    transform: translateY(-50%);
+  }
+
+  & > div:nth-child(2) div {
+    width: 90%;
+    height: 100%;
+    background-color: var(--color-text);
+    border-top-right-radius: var(--border-radius-md);
+    border-bottom-right-radius: var(--border-radius-md);
+    box-shadow: 5px 5px 10px hsl(204, 35%, 11%);
+    position: absolute;
+    
+    z-index: 1;
+    padding: 11px 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    left: -100%;
+    
+    transition: left 600ms;
+
+    & a {
+      padding: 0;
+      color: var(--color-background-white);
+
+      &:hover {
+        color: var(--color-accent);
+      }
+    }
+
+    & p {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-background-white);
+      text-wrap: nowrap;
+    }
+
+    & p:nth-child(2) {
+      font-size: 11px;
+    }
+  }
+}
+
+.flag-shown:hover > div:nth-child(2) div {
+  left: 0;
+}
+
+.flag-shown > div:nth-child(2) div:hover {
+  left: 0;
+}
+
+@media screen and (max-width: 300px) {
+  .recaptcha-flag {
+    transform-origin: top left;
+    transform: scale(0.75);
+  }
+}
+
+
 
 .form_info {
   display: flex;
@@ -919,6 +1033,7 @@ input:focus-visible, textarea:focus-visible {
     height: clamp(13px, 11.0000px + 0.6250vw, 20px);
     position: absolute;
     top: 7px; 
+    left: 0px;
     accent-color: var(--color-accent);
   }
 
@@ -949,10 +1064,10 @@ input:focus-visible, textarea:focus-visible {
   height: clamp(13px, 11.0000px + 0.6250vw, 20px);
   position: absolute;
   top: 7px;
-  left: 0;
+  left: 0px;
   background-color: orangered;
-  border-radius: var(--border-radius-sm);
-  transform: scale(0.99);
+  border-radius: 2px;
+  transform: scale(0.95);
 }
 
 #privacy-content .invalid.invalid-show {
@@ -1350,6 +1465,9 @@ footer a:hover {
 #faq {
   background-color: var(--color-background-white);
   padding: var(--sizing-xxl) var(--site-margins);
+  position: relative;
+
+  z-index: 3;
 
   & h2 {
     text-align: center;
@@ -1408,7 +1526,7 @@ footer a:hover {
   }
 }
 
-.accordion:hover {
+.accordion:hover, .accordion:focus {
   background-color: #d7d7d777;
 }
 
@@ -1483,3 +1601,4 @@ footer a:hover {
     margin-top: var(--sizing-xsm);
   }
 }
+

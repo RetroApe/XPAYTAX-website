@@ -26,6 +26,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $message = htmlspecialchars(trim($_POST["message"]), ENT_QUOTES, 'UTF-8');
     $privacyCheck = isset($_POST["privacy-check"]) ? 'Agreed' : 'Not Agreed';
 
+    //
+    // RECAPTCHA
+    //
+    $recaptchaSecret = '6Lc6lL8qAAAAAEYAXgRVzGaSsr-5DOcZCvwWSAoj';
+    $recaptchaToken = $_POST['recaptchaToken'] ?? '';
+
+    // Verify token with Google
+    $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptchaResponse = file_get_contents($recaptchaUrl . '?secret=' . $recaptchaSecret . '&response=' . $recaptchaToken);
+    $recaptchaData = json_decode($recaptchaResponse, true);
+
+    // Check if the reCAPTCHA validation was successful
+    if (!$recaptchaData['success'] || $recaptchaData['score'] < 0.4) {
+        $logData = [
+            'timestamp' => date("Y-m-d H:i:s"),
+            'ip_address' => $_SERVER['REMOTE_ADDR'],
+            'score' => $recaptchaData['score'] ?? 'N/A',
+            'error_codes' => $recaptchaData['error-codes'] ?? 'None',
+        ];
+        error_log("reCAPTCHA failed attempt: " . print_r($logData, true));
+        
+        // Optionally, log the full response for debugging
+        error_log("Full reCAPTCHA response: " . print_r($recaptchaData, true));
+
+        echo json_encode(["success" => false]);
+        exit;
+    }
+
+
     // Capture the IP address
     $ip = $_SERVER['REMOTE_ADDR'];
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {

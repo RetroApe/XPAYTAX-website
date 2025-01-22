@@ -94,6 +94,21 @@ document.addEventListener("DOMContentLoaded", () => {
             if (contactFormSection) {
                 contactFormSection.innerHTML = html; // Insert fetched HTML content
 
+                const recaptchaFlag = document.querySelector(".recaptcha-flag");
+
+                window.showFlag = () => {
+                    if (recaptchaFlag) {
+                        recaptchaFlag.classList.add("flag-shown");
+                    }
+                };
+
+                window.hideFlag = () => {
+                    if (recaptchaFlag) {
+                        recaptchaFlag.classList.remove("flag-shown");
+                    }
+                };
+                
+
                 // Attach form submission handler after content is loaded
                 const form = document.querySelector("form");
                 const overlay = document.getElementById("overlay-form");
@@ -107,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const submitButton = form.querySelector("button[type='submit']");
 
                 var isSubmitting = false;
+
+
+                
 
                 // Function to validate email
                 function isValidEmail(email) {
@@ -198,11 +216,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     
 
-                    // Prepare form data
-                    const formData = new FormData(form);
 
                     // Checking/Sending PHP Mail
                     try {
+
+                        // Get reCAPTCHA token
+                        const recaptchaToken = await grecaptcha.execute('6Lc6lL8qAAAAAHqqPRQ1JaNi4UYSWXE5hsfNmO2m', { action: 'submit' });
+
+                        // Add reCAPTCHA token to form data
+                        const formData = new FormData(form);
+                        formData.append("recaptchaToken", recaptchaToken);
+
                         // Send the form data to the PHP script
                         const response = await fetch("includes/sendmail.php", {
                             method: "POST",
@@ -246,6 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+                
 
                 // Dismiss message handler
                 window.dismissMessage = () => {
@@ -258,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 document.addEventListener('keydown', (event) => {
                     if (event.key === 'Escape') dismissMessage()
-                  });
+                });
 
             } else {
                 console.error('Target element #contact-form not found');
@@ -426,7 +451,7 @@ function toggleFAQ() {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 27;
+var value1 = 240;
 var value2 = 18;
 
 var clampX;

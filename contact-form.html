@@ -1,11 +1,24 @@
+
 <div class="little-title">
     <span></span>
-    <p>Contact Form</p>
+    <p>Contact Us</p>
     <span></span>
 </div>
 <h2>Take Control of Your Finances!</h2>
 
+<div class="recaptcha-flag">
+    <div onmouseover="showFlag()" onmouseout="hideFlag()"></div>
+    <div>
+        <div onmouseover="showFlag()" onmouseout="hideFlag()">
+            <p>protected by reCAPTCHA</p>
+            <p><a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy</a> - <a href="https://www.google.com/intl/en/policies/terms/" target="_blank">Terms</a></p>
+        </div>
+    </div>
+</div>
+
 <form action="includes/sendmail.php" method="POST" novalidate>
+    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+
     <div class="form_info">
         <span>
             <label for="name">Name*</label>
