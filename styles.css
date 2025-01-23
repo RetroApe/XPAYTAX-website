@@ -106,6 +106,12 @@ h1 {
   line-height: 110%;
   margin-bottom: clamp(24px, 17.1429px + 2.1429vw, 48px);
   padding-right: clamp(2rem, 1.4286rem + 2.8571vw, 4rem);
+
+  & span {
+    color: var(--color-text-muted);
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
 }
 
 h2 {
@@ -520,6 +526,10 @@ nav a.cta {
 
   & .item2 {
     margin-right: -50px;
+  }
+
+  & h1 {
+    padding-right: clamp(32px, 12.5714px + 6.0714vw, 100px)
   }
 
   & p {
@@ -1250,11 +1260,6 @@ footer a:hover {
   margin-right: var(--sizing-sm);
 }
 
-#google-map {
-  margin-top: var(--sizing-sm);
-  width: 100%;
-}
-
 .social-footer p {
   margin-bottom: var(--sizing-sm);
 }
@@ -1387,6 +1392,16 @@ footer a:hover {
 }
 
 
+
+  /* ************ */
+ /* CONTACT PAGE */
+/* ************ */
+
+
+#google-map {
+  margin-top: var(--sizing-sm);
+  width: 512px;
+}
 
 
 

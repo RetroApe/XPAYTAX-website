@@ -451,8 +451,8 @@ function toggleFAQ() {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 240;
-var value2 = 18;
+var value1 = 100;
+var value2 = 32;
 
 var clampX;
 var clampY;
