@@ -450,9 +450,9 @@ function toggleFAQ() {
 
 
 var width1 = 1440;
-var width2 = 320;
-var value1 = 100;
-var value2 = 32;
+var width2 = 400;
+var value1 = 13;
+var value2 = 10;
 
 var clampX;
 var clampY;

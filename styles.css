@@ -212,12 +212,9 @@ button.cta, a.cta {
 .breaker {
   height: var(--sizing-xl);
   background-color: var(--color-background-white);
-
-  &.invert {
-    background-color: var(--color-background-dark);
-    box-shadow: inset var(--box-shadow);
-  }
 }
+
+
 
 #open-sidebar-button {
   display: none;
@@ -697,10 +694,6 @@ p + p {
   & .side-margin-block {
     background-color: var(--color-background-dark);
     box-shadow: inset var(--box-shadow);
-
-    &.right {
-      border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-    }
   }
 
   & .flex {
@@ -1045,6 +1038,7 @@ input:focus-visible, textarea:focus-visible {
     top: 7px; 
     left: 0px;
     accent-color: var(--color-accent);
+
   }
 
   & label {
@@ -1220,7 +1214,7 @@ footer a:hover {
 
 .footer-information {
   background-color: var(--color-background-white);
-  padding: var(--sizing-lg) calc(var(--site-margins) * 2);
+  padding: var(--sizing-lg) calc(var(--site-margins) + clamp(0px, -336.4706px + 30.5882vw, 104px));
 
   display: flex;
   justify-content: space-between;
@@ -1248,7 +1242,7 @@ footer a:hover {
 }
 
 .site-list {
-  gap: var(--sizing-xl);
+  gap: var(--sizing-lg);
 }
 
 
@@ -1312,8 +1306,12 @@ footer a:hover {
     gap: 0;
   }
 
-  .contact-footer, .social-footer {
+  .social-footer {
     align-items: center;
+  }
+
+  .contact-footer .titled {
+    align-self: center;
   }
 
 
@@ -1393,15 +1391,7 @@ footer a:hover {
 
 
 
-  /* ************ */
- /* CONTACT PAGE */
-/* ************ */
-
-
-#google-map {
-  margin-top: var(--sizing-sm);
-  width: 512px;
-}
+ 
 
 
 
@@ -1581,10 +1571,6 @@ footer a:hover {
   & .side-margin-block {
     background-color: var(--color-background-dark);
     box-shadow: inset var(--box-shadow);
-
-    &.right {
-      border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-    }
   }
 
   & div:nth-child(2) {
@@ -1617,3 +1603,132 @@ footer a:hover {
   }
 }
 
+
+
+
+
+ /* ************ */
+ /* CONTACT PAGE */
+/* ************ */
+
+
+#google-map {
+  margin-top: var(--sizing-sm);
+  width: clamp(150px, 77.6000px + 30.1667vw, 512px);
+}
+
+.right {
+  border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
+}
+
+.invert {
+  background-color: var(--color-background-dark);
+  box-shadow: inset var(--box-shadow);
+}
+
+.justify-space {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.titled {
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.white-bg {
+  background-color: var(--color-background-white);
+}
+
+.padding-y-xxl {
+  padding-top: var(--sizing-xxl);
+  padding-bottom: var(--sizing-xxl);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.justify-around {
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.relative {
+  position: relative;
+}
+
+@media screen and (max-width: 900px) {
+  .contact-page-contact  {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+  /* ******* */
+ /* TOOLTIP */
+/* ******* */
+
+.tooltip-container {
+  & .tooltip {
+    display: inline;
+    position: relative;
+
+  }
+
+  & > h3 {
+    display: inline;
+  }
+
+  & p {
+    display: inline;
+    font-size: clamp(1.125rem, 0.9464rem + 0.8929vw, 1.75rem);
+    font-weight: 900;
+    color: var(--color-accent);
+    text-decoration: overline;
+  }
+}
+
+.tooltip-text {
+  display: block;
+  max-width: 300px;
+  color: var(--color-text);
+  background-color: var(--color-accent);
+  font-family: var(--font-primary);
+  font-size: clamp(0.625rem, 0.5529rem + 0.2885vw, 0.8125rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: var(--border-radius-md);
+
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom;
+
+  transition: transform 300ms;
+
+  & img {
+    width: 50px;
+    margin: 8px auto;
+  }
+}
+
+
+.tooltip:hover .tooltip-text {
+    transform: translateX(-50%) scale(1);
+  }
+
+  h3:hover ~ .tooltip .tooltip-text {
+    transform: translateX(-50%) scale(1);
+  }
