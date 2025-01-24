@@ -1732,3 +1732,5 @@ footer a:hover {
   h3:hover ~ .tooltip .tooltip-text {
     transform: translateX(-50%) scale(1);
   }
+
+/* lll */
