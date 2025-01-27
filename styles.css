@@ -504,9 +504,9 @@ nav a.cta {
 }
 
 #hero.hero_sub-page {
-  & > div {
+  /* & > div {
     justify-content: space-between;
-  }
+  } */
 
   & .polygon {
     justify-content: flex-start;
@@ -517,21 +517,25 @@ nav a.cta {
     margin-top: 32px;
   }
 
-  & .item1 {
+  /* & .item1 {
     max-width: 800px;
-  }
+  } */
 
   & .item2 {
     margin-right: -50px;
   }
 
   & h1 {
-    padding-right: clamp(32px, 12.5714px + 6.0714vw, 100px)
+    padding-right: clamp(40px, 17.1429px + 7.1429vw, 120px);
   }
 
   & p {
     margin-bottom: 0;
-    padding-right: clamp(80px, 45.7143px + 10.7143vw, 200px);
+    padding-right: clamp(80px, 34.2857px + 14.2857vw, 240px);
+  }
+
+  & a.cta {
+    margin-top: var(--sizing-xxl);
   }
 }
 
