@@ -1650,13 +1650,35 @@ footer a:hover {
   background-color: var(--color-background-white);
 }
 
+.padding-x-site {
+  padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
+}
+
 .padding-y-xxl {
   padding-top: var(--sizing-xxl);
   padding-bottom: var(--sizing-xxl);
 }
 
+.op-80 {
+  opacity: 80%;
+}
+
 .w-100 {
   width: 100%;
+}
+
+.mw-1300 {
+  max-width: 1300px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-x-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .justify-around {
@@ -1737,4 +1759,3 @@ footer a:hover {
     transform: translateX(-50%) scale(1);
   }
 
-/* lll */
