@@ -716,6 +716,24 @@ p + p {
   text-align: center;
 }
 
+#services h3 a{
+  position: relative;
+}
+
+#services h3 a::after {
+  content: " " url(assets/icons/link.svg);
+  width: 10px;
+  fill: var(--color-text);
+
+  &:hover {
+    fill: var(--color-accent);
+  }
+}
+
+#services h3 a:hover {
+  color: var(--color-accent);
+}
+
 #services img {
   max-width: clamp(75px, 60.7143px + 4.4643vw, 125px);
   flex-shrink: 0;
@@ -757,6 +775,7 @@ h3 + ul {
 
   #services .item {
     align-self: stretch;
+    position: relative;
   }
 
   #services h3 {
@@ -1703,23 +1722,21 @@ footer a:hover {
  /* TOOLTIP */
 /* ******* */
 
-.tooltip-container {
-  & .tooltip {
-    display: inline;
-    position: relative;
-
-  }
-
-  & > h3 {
-    display: inline;
-  }
-
+.tooltip {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  
   & p {
-    display: inline;
-    font-size: clamp(1.125rem, 0.9464rem + 0.8929vw, 1.75rem);
-    font-weight: 900;
+    font-size: 4rem;
     color: var(--color-accent);
-    text-decoration: overline;
+    line-height: 1.2;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tooltip {
+    top: -100px;
   }
 }
 
@@ -1737,7 +1754,7 @@ footer a:hover {
   border-radius: var(--border-radius-md);
 
   position: absolute;
-  bottom: calc(100% + 16px);
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%) scale(0);
   transform-origin: bottom;
@@ -1759,3 +1776,51 @@ footer a:hover {
     transform: translateX(-50%) scale(1);
   }
 
+
+
+
+
+  .service-detail {
+    padding: clamp(64px, 45.7143px + 5.7143vw, 128px) var(--site-margins);
+    background-color: var(--color-background-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sizing-xl);
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: var(--sizing-xxl);
+    }
+
+    & > div:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    & div > div {
+      max-width: 700px;
+    }
+
+    & div > div:has(img) {
+      flex-shrink: 1;
+      max-width: 300px;
+    }
+
+    & img {
+    }
+
+    h3 {
+      margin-top: var(--sizing-lg);
+    }
+
+    p {
+      margin-top: var(--sizing-md);
+      opacity: 80%;
+    }
+
+    ul {
+      margin-top: var(--sizing-sm);
+      opacity: 80%;
+    }
+  }
