@@ -1786,12 +1786,27 @@ footer a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--sizing-xl);
+    gap: var(--sizing-xxl);
 
     & > div {
       display: flex;
       align-items: center;
       gap: var(--sizing-xxl);
+      position: relative;
+    }
+
+    & > div + div::before {
+      content: "";
+      width: 80%;
+      height: 2px;
+      background-color: var(--color-text);
+      opacity: 25%;
+      
+      position: absolute;
+      top: calc(var(--sizing-xxl) / (-2));
+      left: 50%;
+      transform: translateX(-50%);
+
     }
 
     & > div:nth-child(even) {
@@ -1799,20 +1814,14 @@ footer a:hover {
     }
 
     & div > div {
-      max-width: 700px;
+      max-width: 800px;
     }
 
     & div > div:has(img) {
       flex-shrink: 1;
-      max-width: 300px;
+      max-width: 200px;
     }
 
-    & img {
-    }
-
-    h3 {
-      margin-top: var(--sizing-lg);
-    }
 
     p {
       margin-top: var(--sizing-md);
@@ -1822,5 +1831,13 @@ footer a:hover {
     ul {
       margin-top: var(--sizing-sm);
       opacity: 80%;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .service-detail {
+      & > div {
+        flex-direction: column !important;
+      }
     }
   }
