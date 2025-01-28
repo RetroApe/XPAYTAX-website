@@ -7,81 +7,125 @@ var navLinks;
 document.addEventListener("DOMContentLoaded", () => {
 
     // Load navigation
-fetch('nav.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('navigation').innerHTML = data;
+    fetch('components/nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navigation').innerHTML = data;
 
-        const navButton = document.getElementById("nav-button");
-        navList = document.getElementById("nav-list");
-        navLinks = document.querySelectorAll(".nav-link a");
-        const navBar = document.getElementById("navbar");
+            const navButton = document.getElementById("nav-button");
+            navList = document.getElementById("nav-list");
+            navLinks = document.querySelectorAll(".nav-link a");
+            const navBar = document.getElementById("navbar");
 
-        const currentPage = window.location.pathname.split("/").pop(); // Get the current page file name
+            const currentPage = window.location.pathname.split("/").pop(); // Get the current page file name
 
-        navLinks.forEach(link => {
-            if (link.getAttribute("href") === currentPage) {
-                link.classList.add("active-link"); // Add active class
-                link.setAttribute("aria-current", "page"); // Set aria-current attribute
-            } else {
-                link.classList.remove("active-link"); // Remove active class
-                link.removeAttribute("aria-current"); // Remove aria-current attribute
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentPage) {
+                    link.classList.add("active-link"); // Add active class
+                    link.setAttribute("aria-current", "page"); // Set aria-current attribute
+                } else {
+                    link.classList.remove("active-link"); // Remove active class
+                    link.removeAttribute("aria-current"); // Remove aria-current attribute
+                }
+            });
+
+
+            openButton = document.getElementById("open-sidebar-button");
+
+
+            // Function to move the button based on screen width
+            function handleResize() {
+                if (window.innerWidth <= 1000) {
+                    // Move navButton into navList
+                    if (!navList.contains(navButton)) {
+                        const listItem = document.createElement("li");
+                        listItem.className = "nav-button";
+                        listItem.appendChild(navButton);
+                        navList.appendChild(listItem);
+                    }
+
+                } else {
+                    // Move navButton back to its original position
+                    if (navList.contains(navButton)) {
+                        navBar.appendChild(navButton);
+                        const listItem = navList.querySelector(".nav-button:last-child"); // Remove the empty <li>
+                        if (listItem) listItem.remove();
+                    }
+
+                    navList.classList.remove("show");  
+                    const overlay = document.getElementById("overlay");
+                    overlay.style.display = "none"; 
+
+                    navList.removeAttribute('inert');
+                }
             }
+
+
+
+            // LANGUAGE SWITCHING
+
+            const englishLink = document.getElementById("english-link");
+            const germanLink = document.getElementById("german-link");
+
+            // Get the current path and hostname
+            const currentPath = window.location.pathname;
+
+            console.log(currentPath);
+
+            // Check if the current URL is in the English folder or root (German)
+            if (currentPath.startsWith("/en")) {
+                // Replace "/en" with "/" for the German link
+                germanLink.href = currentPath.replace("/en", "");
+                englishLink.href = currentPath; // English stays the same
+            } else {
+                // Add "/en" for the English link
+                englishLink.href = "/en" + currentPath;
+                germanLink.href = currentPath; // German stays the same
+            }
+
+            console.log(englishLink.href);
+            console.log(germanLink.href);
+
+
+
+
+            // Attach the function to the resize event and run it initially
+            window.addEventListener("resize", handleResize);
+            handleResize(); // Run initially to check current screen size
         });
-
-
-        openButton = document.getElementById("open-sidebar-button");
-
-
-        // Function to move the button based on screen width
-        function handleResize() {
-            if (window.innerWidth <= 1000) {
-                // Move navButton into navList
-                if (!navList.contains(navButton)) {
-                    const listItem = document.createElement("li");
-                    listItem.className = "nav-button";
-                    listItem.appendChild(navButton);
-                    navList.appendChild(listItem);
-                }
-
-            } else {
-                // Move navButton back to its original position
-                if (navList.contains(navButton)) {
-                    navBar.appendChild(navButton);
-                    const listItem = navList.querySelector(".nav-button:last-child"); // Remove the empty <li>
-                    if (listItem) listItem.remove();
-                }
-
-                navList.classList.remove("show");  
-                const overlay = document.getElementById("overlay");
-                overlay.style.display = "none"; 
-
-                navList.removeAttribute('inert');
-            }
-        }
-
-
-
-
-        // Attach the function to the resize event and run it initially
-        window.addEventListener("resize", handleResize);
-        handleResize(); // Run initially to check current screen size
-    });
 
 
 
     // Load footer
-    fetch('footer.html')
+    fetch('components/footer.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('footer').innerHTML = data;
         });
 });    
 
+document.addEventListener("DOMContentLoaded", () => {
+    const benefitsSection = document.getElementById("benefits");
+    if (benefitsSection) {
+        fetch("components/benefits.html")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load benefits.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                benefitsSection.innerHTML = html;
+            })
+            .catch((error) => console.error("Error injecting benefits.html:", error));
+    }
+});
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     // Fetch the contact form
-    fetch('contact-form.html')
+    fetch('components/contact-form.html')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load contact-form.html');
@@ -390,7 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reviewsSection = document.getElementById("reviews-section");
 
     // Fetch the carousel content from reviews.html
-    fetch("reviews.html")
+    fetch("components/reviews.html")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to load reviews.html");
@@ -414,7 +458,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const faq = document.getElementById('faq');
 
-    fetch("faq.html")
+    fetch("components/faq.html")
         .then((response) => {
             if (!response.ok) {
                 throw new Error("Failed to load faq.html");
@@ -450,9 +494,9 @@ function toggleFAQ() {
 
 
 var width1 = 1440;
-var width2 = 320;
-var value1 = 240;
-var value2 = 80;
+var width2 = 900;
+var value1 = 5*16;
+var value2 = 3*16;
 
 var clampX;
 var clampY;
