@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then((html) => {
                 insertMessage.innerHTML = html;
+                adjustPaths(insertMessage);
             })
             .catch((error) => console.error("Error injecting insert-message.html:", error));
     }
@@ -200,10 +201,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(html => {
             const contactFormSection = document.getElementById('contact-form');
-            adjustPaths(contactFormSection);
+            
 
             if (contactFormSection) {
                 contactFormSection.innerHTML = html; // Insert fetched HTML content
+                adjustPaths(contactFormSection);
 
                 const recaptchaFlag = document.querySelector(".recaptcha-flag");
 
