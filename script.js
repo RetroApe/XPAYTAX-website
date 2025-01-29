@@ -4,16 +4,15 @@ var navList;
 var openButton;
 var navLinks;
 
-console.log(window.location.pathname);
-console.log(window.location.pathname.split('/'));
+console.log(window.location.pathname.split('/').filter(Boolean));
 
 function getRelativePath(filePath) {
     const pathSegments = window.location.pathname.split('/').filter(Boolean); // Remove empty segments
-    let depth = pathSegments.length - 2; // Subtract 1 to exclude the filename
+    let depth = pathSegments.length - 2; // Subtract 2 to exclude the filename
 
-    // Check if the site is in the English version ("en" folder)
+    // Check if the site is in the English version
     if (pathSegments[1] === 'en') {
-        depth--; // Reduce depth because "en" is an extra segment
+        depth--; 
     }
 
     const prefix = depth > 0 ? '../'.repeat(depth) : '';
@@ -24,17 +23,25 @@ function getRelativePath(filePath) {
 function adjustPaths(container) {
     if (!container) return;
     
+    // Adjust image paths
     container.querySelectorAll('img').forEach(img => {
-        img.src = getRelativePath(img.getAttribute('src'));
+        const src = img.getAttribute('src');
+        if (src && !src.startsWith('http') && !src.startsWith('mailto:')) {
+            img.src = getRelativePath(src);
+        }
     });
+
+    // Adjust anchor links (ignore external links)
     container.querySelectorAll('a').forEach(a => {
-        a.href = getRelativePath(a.getAttribute('href'));
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith('http') && !href.startsWith('mailto:')) {
+            a.href = getRelativePath(href);
+        }
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    console.log(getRelativePath("components/nav.html"));
+document.addEventListener("DOMContentLoaded", () => {
 
     // Load navigation
     fetch(getRelativePath("components/nav.html"))
@@ -201,7 +208,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(html => {
             const contactFormSection = document.getElementById('contact-form');
-            
 
             if (contactFormSection) {
                 contactFormSection.innerHTML = html; // Insert fetched HTML content
@@ -235,8 +241,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const submitButton = form.querySelector("button[type='submit']");
 
                 var isSubmitting = false;
+                var action = form.getAttribute('action');
 
+                console.log(action);
+                action = getRelativePath(action);
+                form.setAttribute('action', action);
+                console.log(action);
 
+                // console.log(form.getAttribute('action'));
+                // form.setAttribute('action', getRelativePath(form.getAttribute('action')));
+                // console.log(form.getAttribute('action'));
                 
 
                 // Function to validate email
@@ -341,7 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         formData.append("recaptchaToken", recaptchaToken);
 
                         // Send the form data to the PHP script
-                        const response = await fetch("includes/sendmail.php", {
+                        const response = await fetch(action, {
                             method: "POST",
                             body: formData,
                         });
