@@ -45,6 +45,11 @@
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
+
+  &::selection {
+    color: var(--color-background-white);
+    background: var(--color-accent);
+  }
 }
 
 /* 2. Remove default margin */
@@ -101,7 +106,7 @@ p {
 }
 
 h1 {
-  font-size: clamp(2rem, 1.4286rem + 2.8571vw, 4rem);
+  font-size: clamp(2rem, 1.5000rem + 2.5000vw, 3.75rem);
   letter-spacing: -1px;
   line-height: 110%;
   margin-bottom: 24px;
@@ -549,6 +554,7 @@ nav a.cta {
 
   & h1 {
     padding-right: clamp(40px, 17.1429px + 7.1429vw, 120px);
+    max-width: 27ch;
   }
 
   & p {
@@ -573,7 +579,7 @@ nav a.cta {
     margin-left: clamp(-100px, 6.6667px + -7.4074vw, -60px);
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1100px) {
     #hero .flex {
       flex-direction: column;
       align-items: stretch;
@@ -749,7 +755,7 @@ p + p {
 }
 
 #services h2 {
-  margin: var(--sizing-xxl) 0; 
+  margin: 0 0 var(--sizing-xxl) 0; 
   text-align: center;
 }
 
@@ -798,6 +804,8 @@ h3 + ul {
 .middle {
   display: flex;
   flex-direction: column;
+
+  margin: var(--sizing-xxl) 0 clamp(96px, 86.8571px + 2.8571vw, 128px) 0;
 
   & a {
     align-self: center;

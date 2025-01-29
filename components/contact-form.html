@@ -1,10 +1,10 @@
 
 <div class="little-title">
     <span></span>
-    <p>Contact Us</p>
+    <p>Kontaktieren uns</p>
     <span></span>
 </div>
-<h2>Take Control of Your Finances!</h2>
+<h2>Ihre Finanzen, Ihre Kontrolle!</h2>
 
 <div class="recaptcha-flag">
     <div onmouseover="showFlag()" onmouseout="hideFlag()"></div>
@@ -22,35 +22,35 @@
     <div class="form_info">
         <span>
             <label for="name">Name*</label>
-            <span class="invalid">Required</span>
+            <span class="invalid">Erforderlich</span>
             <input type="text" id="name" name="name">
         </span>
         <span>
             <label for="email">Email*</label>
-            <span class="invalid">Invalid</span>
+            <span class="invalid">Ungültig</span>
             <input type="email" id="email" name="email">
         </span>
         <span>
-            <label for="phone">Phone</label> 
+            <label for="phone">Telefon</label> 
             <input type="tel" id="phone" name="phone">
         </span>
     </div>
 
     <span>
-        <label for="message">Message*</label>
-        <span class="invalid">Required</span>
+        <label for="message">Nachricht*</label>
+        <span class="invalid">Erforderlich</span>
         <textarea id="message" name="message" rows="4" required></textarea>
     </span>
 
     <span id="privacy-content">
         <span class="invalid"></span>
         <input type="checkbox" id="privacy-check" name="privacy-check" required>
-        <label for="privacy-check">I agree to the <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
-        <p>We will use your contact data solely to respond to your inquiry.</p>
+        <label for="privacy-check">Ich akzeptiere die <a href="privacy-policy.html" target="_blank">Privacy Policy</a>.</label>
+        <p>Wir werden Ihre Kontaktdaten ausschließlich zur Beantwortung Ihrer Anfrage verwenden.</p>
     </span>
 
 
-    <button class="cta" type="submit">Send Message</button>
+    <button class="cta" type="submit">Nachricht senden</button>
 
 </form>
 
@@ -58,29 +58,29 @@
 
 <div id="success" class="flex form-response">
 
-    <div class="img-wrap"><img src="/assets/icons/email-success.png" alt="email successfully sent icon"></div>
+    <div class="img-wrap"><img src="assets/icons/email-success.png" alt="Symbol für erfolgreich gesendete E-Mail"></div>
 
-    <h2>Thank you for getting in touch!</h2>
+    <h2>Danke, dass Sie sich gemeldet haben!</h2>
     
-    <p>Hi <span class="use-client-name"></span>.</p>
-    <p>We will get back in touch with you as soon as possible.</p>
-    <p><span>Have a great day!</span></p>
+    <p>Hallo <span class="use-client-name"></span>.</p>
+    <p>Wir werden uns so bald wie möglich mit Ihnen in Verbindung setzen.</p>
+    <p><span>Ich wünsche Ihnen einen schönen Tag!</span></p>
     
-    <button class="cta" onclick="dismissMessage()">Close</button>
+    <button class="cta" onclick="dismissMessage()">Schließen</button>
 
 </div>
 
 <div id="failure" class="flex form-response">
 
-    <div class="img-wrap"><img src="/assets/icons/email-fail.png" alt="email failed to be sent icon"></div>
+    <div class="img-wrap"><img src="assets/icons/email-fail.png" alt="E-Mail konnte nicht gesendet werden Symbol"></div>
 
     <h2>Somehing went wrong</h2>
     
-    <p>Hi <span class="use-client-name"></span>.</p>
-    <p>It seems there was a problem in sending the message.</p>
-    <p>Please try again or call us directly.</p>
+    <p>Hallo <span class="use-client-name"></span>.</p>
+    <p>Anscheinend gab es ein Problem beim Senden der Nachricht.</p>
+    <p>Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.</p>
     
-    <button class="cta" onclick="dismissMessage()">Close</button>
+    <button class="cta" onclick="dismissMessage()">Schließen</button>
 
 </div>
 

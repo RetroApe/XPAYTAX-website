@@ -4,13 +4,44 @@ var navList;
 var openButton;
 var navLinks;
 
+console.log(window.location.pathname);
+console.log(window.location.pathname.split('/'));
+
+function getRelativePath(filePath) {
+    const pathSegments = window.location.pathname.split('/').filter(Boolean); // Remove empty segments
+    let depth = pathSegments.length - 2; // Subtract 1 to exclude the filename
+
+    // Check if the site is in the English version ("en" folder)
+    if (pathSegments[1] === 'en') {
+        depth--; // Reduce depth because "en" is an extra segment
+    }
+
+    const prefix = depth > 0 ? '../'.repeat(depth) : '';
+    return prefix + filePath;
+}
+
+
+function adjustPaths(container) {
+    if (!container) return;
+    
+    container.querySelectorAll('img').forEach(img => {
+        img.src = getRelativePath(img.getAttribute('src'));
+    });
+    container.querySelectorAll('a').forEach(a => {
+        a.href = getRelativePath(a.getAttribute('href'));
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
 
+    console.log(getRelativePath("components/nav.html"));
+
     // Load navigation
-    fetch('components/nav.html')
+    fetch(getRelativePath("components/nav.html"))
         .then(response => response.text())
         .then(data => {
             document.getElementById('navigation').innerHTML = data;
+            adjustPaths(document.getElementById('navigation')); // Fix paths
 
             const navButton = document.getElementById("nav-button");
             navList = document.getElementById("nav-list");
@@ -67,27 +98,27 @@ document.addEventListener("DOMContentLoaded", () => {
             const englishLink = document.getElementById("english-link");
             const germanLink = document.getElementById("german-link");
 
-            // Get the current path and hostname
-            const currentPath = window.location.pathname;
+            // Detect base path dynamically (for local & live)
+            const pathParts = window.location.pathname.split("/").filter(Boolean);
+            const isLocal = window.location.hostname === "localhost";
+            const basePath = isLocal ? `/${pathParts[0]}` : "";
 
-            console.log(currentPath);
+            // Get the relative path (excluding basePath)
+            const currentPath = window.location.pathname.replace(basePath, "");
 
-            // Check if the current URL is in the English folder or root (German)
+            console.log("Detected basePath:", basePath);
+            console.log("Relative Path:", currentPath);
+
+            // Check if the current URL is in English or German
             if (currentPath.startsWith("/en")) {
-                // Replace "/en" with "/" for the German link
-                germanLink.href = currentPath.replace("/en", "");
-                englishLink.href = currentPath; // English stays the same
+                // Switch to German by removing "/en"
+                germanLink.href = basePath + currentPath.replace("/en", "");
+                englishLink.href = basePath + currentPath; // English stays the same
             } else {
-                // Add "/en" for the English link
-                englishLink.href = "/en" + currentPath;
-                germanLink.href = currentPath; // German stays the same
+                // Switch to English by adding "/en"
+                englishLink.href = basePath + "/en" + currentPath;
+                germanLink.href = basePath + currentPath; // German stays the same
             }
-
-            console.log(englishLink.href);
-            console.log(germanLink.href);
-
-
-
 
             // Attach the function to the resize event and run it initially
             window.addEventListener("resize", handleResize);
@@ -97,17 +128,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Load footer
-    fetch('components/footer.html')
+    fetch(getRelativePath("components/footer.html"))
+
         .then(response => response.text())
         .then(data => {
             document.getElementById('footer').innerHTML = data;
+            adjustPaths(document.getElementById('footer'));
         });
 });    
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    const insertMessage = document.getElementById("insert-message");
+    if (insertMessage) {
+        fetch(getRelativePath("components/insert-message.html"))
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load insert-message.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                insertMessage.innerHTML = html;
+            })
+            .catch((error) => console.error("Error injecting insert-message.html:", error));
+    }
+
+    const servicesSection = document.getElementById("services");
+    if (servicesSection) {
+        fetch(getRelativePath("components/services-comp.html"))
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load services-comp.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                servicesSection.innerHTML = html;
+                adjustPaths(servicesSection);
+            })
+            .catch((error) => console.error("Error injecting services-comp.html:", error));
+    }
+
     const benefitsSection = document.getElementById("benefits");
     if (benefitsSection) {
-        fetch("components/benefits.html")
+        fetch(getRelativePath("components/benefits.html"))
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to load benefits.html");
@@ -116,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then((html) => {
                 benefitsSection.innerHTML = html;
+                adjustPaths(benefitsSection);
             })
             .catch((error) => console.error("Error injecting benefits.html:", error));
     }
@@ -125,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Fetch the contact form
-    fetch('components/contact-form.html')
+    fetch(getRelativePath('components/contact-form.html'))
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to load contact-form.html');
@@ -134,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(html => {
             const contactFormSection = document.getElementById('contact-form');
+            adjustPaths(contactFormSection);
 
             if (contactFormSection) {
                 contactFormSection.innerHTML = html; // Insert fetched HTML content
@@ -434,23 +501,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const reviewsSection = document.getElementById("reviews-section");
 
     // Fetch the carousel content from reviews.html
-    fetch("components/reviews.html")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Failed to load reviews.html");
-            }
-            return response.text();
-        })
-        .then((html) => {
-            // Inject the carousel HTML into the placeholder
-            reviewsSection.innerHTML = html;
+    if (reviewsSection) {
+        fetch("components/reviews.html")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load reviews.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                // Inject the carousel HTML into the placeholder
+                reviewsSection.innerHTML = html;
 
-            // Add JavaScript functionality for carousel navigation
-            // initializeCarousel();
-        })
-        .catch((error) => {
-            console.error("Error loading reviews.html:", error);
-        });
+                // Add JavaScript functionality for carousel navigation
+                // initializeCarousel();
+            })
+            .catch((error) => {
+                console.error("Error loading reviews.html:", error);
+            });
+        }
 });
 
 
@@ -458,21 +527,23 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const faq = document.getElementById('faq');
 
-    fetch("components/faq.html")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Failed to load faq.html");
-            }
-            return response.text();
-        })
-        .then((html) => {
-            faq.innerHTML = html;
-
-            toggleFAQ();
-        })
-        .catch((error) => {
-            console.error("Error loading faq.html:", error);
-        })
+    if (faq) {
+        fetch("components/faq.html")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load faq.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                faq.innerHTML = html;
+    
+                toggleFAQ();
+            })
+            .catch((error) => {
+                console.error("Error loading faq.html:", error);
+            })
+    }
 })
 
 
@@ -494,9 +565,9 @@ function toggleFAQ() {
 
 
 var width1 = 1440;
-var width2 = 900;
-var value1 = 5*16;
-var value2 = 3*16;
+var width2 = 320;
+var value1 = 128;
+var value2 = 96;
 
 var clampX;
 var clampY;
