@@ -47,8 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(getRelativePath("components/nav.html"))
         .then(response => response.text())
         .then(data => {
-            document.getElementById('navigation').innerHTML = data;
-            adjustPaths(document.getElementById('navigation')); // Fix paths
+            const navContainer = document.getElementById('navigation');
+            navContainer.innerHTML = data;
+
+            adjustPaths(navContainer); // Fix paths
 
             const navButton = document.getElementById("nav-button");
             navList = document.getElementById("nav-list");
@@ -67,9 +69,46 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
+            const dropdown = document.querySelector(".dropdown");
+            const dropdownContainer = dropdown.querySelector(".dropdown-container");
+            const dropdownMenu = dropdownContainer.querySelector('.dropdown-menu');
+
+            window.showDropdown = () => {
+                if (dropdown) {
+                    dropdown.classList.add("dropdown-shown");
+                    dropdownContainer.removeAttribute('inert')
+                }
+            };
+
+            window.hideDropdown = () => {
+                if (dropdown) {
+                    dropdown.classList.remove("dropdown-shown");
+                    dropdownContainer.setAttribute('inert', "")
+                }
+            };
+
 
             openButton = document.getElementById("open-sidebar-button");
 
+            navContainer.addEventListener("click", (event) => {
+                if (event.target.id === "open-dropdown") {
+                    dropdownContainer.classList.toggle("dropdown-show");
+                }
+            });
+
+
+            // Handle clicks outside dropdown on mobile
+            document.addEventListener("click", (event) => {
+                if (window.innerWidth < 1000 && !dropdown.contains(event.target)) {
+                    dropdownMenu.classList.remove("dropdown-shown");
+                }
+            });
+
+            // Attach desktop event listeners
+            if (window.innerWidth >= 1000) {
+                dropdown.addEventListener("mouseover", showDropdown);
+                dropdown.addEventListener("mouseout", hideDropdown);
+            }
 
             // Function to move the button based on screen width
             function handleResize() {
@@ -81,6 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         listItem.appendChild(navButton);
                         navList.appendChild(listItem);
                     }
+
+                    dropdown.removeAttribute("onmouseover");
+                    dropdown.removeAttribute("onmouseout");
+                    dropdownMenu.removeAttribute('onmouseover');
+                    dropdownMenu.removeAttribute("onmouseout");
+
 
                 } else {
                     // Move navButton back to its original position
@@ -95,6 +140,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     overlay.style.display = "none"; 
 
                     navList.removeAttribute('inert');
+
+                    dropdown.setAttribute("onmouseover", "showDropdown()");
+                    dropdown.setAttribute('onmouseout', "hideDropdown()");
+                    dropdownMenu.setAttribute("onmouseover", "showDropdown()");
+                    dropdownMenu.setAttribute('onmouseout', "hideDropdown()");
+
                 }
             }
 
@@ -582,8 +633,8 @@ function toggleFAQ() {
 
 var width1 = 1440;
 var width2 = 320;
-var value1 = 128;
-var value2 = 96;
+var value1 = 96;
+var value2 = 64;
 
 var clampX;
 var clampY;
