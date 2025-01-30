@@ -489,6 +489,10 @@ nav a.cta {
 
   .dropdown > a {
     height: 92px !important;
+
+    & > div svg {
+      display: none;
+    }
   }
 
   .dropdown-container {
