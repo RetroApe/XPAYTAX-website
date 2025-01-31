@@ -299,8 +299,8 @@ nav {
     top: -100%;
     left: 0px;
     background: linear-gradient(
-    var(--color-accent2) 0%,
-    var(--color-accent2) 90%,
+    var(--color-accent) 0%,
+    var(--color-accent) 90%,
     hsla(0, 0%, 100%, 0));
     -webkit-transition: top .3s ease;
     transition: top .4s ease;
