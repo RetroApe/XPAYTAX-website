@@ -1849,6 +1849,14 @@ footer a:hover {
   box-shadow: inset var(--box-shadow);
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
+.f-center {
+  align-items: center;
+}
+
 .justify-space {
   justify-content: space-between;
   gap: 16px;
@@ -2044,5 +2052,32 @@ footer a:hover {
     & > div {
       flex-direction: column !important;
     }
+  }
+}
+
+
+#core-pricing {
+  background-color: var(--color-background-dark);
+
+  & > div {
+    gap: 16px;
+  }
+
+  & > div > div:not(:first-child) {
+    gap: 32px;
+
+    & > div {
+      background-color: var(--color-background-white);
+      padding: var(--sizing-md);
+    }
+  }
+
+  li {
+    margin: var(--sizing-xxs) 0;
+  }
+
+  .price {
+    margin-top: auto;
+    padding: var(--sizing-lg) 0;
   }
 }
