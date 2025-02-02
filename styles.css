@@ -102,7 +102,8 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     font-family: var(--font-secondary);
-    font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+    /* font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem); */
+    font-size: 1.125rem;
 }
 
 h1 {
@@ -135,6 +136,7 @@ h3 {
 a {
   text-decoration: none;
   color: var(--color-text);
+  font-size: 1.125rem;
 
   &:link {
     text-decoration: none;
@@ -156,7 +158,8 @@ a {
 li {
   color: var(--color-text);
   font-family: var(--font-secondary);
-  font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
+  /* font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem); */
+  font-size: 1.125rem;
 }
 
 .flex {
@@ -168,6 +171,7 @@ li {
   justify-content: center;
   align-items: center;
   margin-bottom: var(--sizing-sm);
+  text-align: center;
 
   & span {
     display: inline-block;
@@ -252,6 +256,7 @@ nav {
   
 
   & .nav-link a {
+    font-size: inherit;
     flex-shrink: 0;
     margin: 0;;
     position: relative;
@@ -921,6 +926,7 @@ p + p {
 
 #services h3 a{
   position: relative;
+  font-size: inherit;
 }
 
 #services h3 a::after {
@@ -1276,6 +1282,7 @@ input:focus-visible, textarea:focus-visible {
 
   & label a {
     color: var(--color-accent2);
+    font-size: inherit;
 
     &:hover {
     color: var(--color-accent);
@@ -2049,8 +2056,20 @@ footer a:hover {
 
 @media screen and (max-width: 800px) {
   .service-detail {
+
+    padding-left: 0;
+    padding-right: 0;
+
     & > div {
       flex-direction: column !important;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    ul {
+      padding-left: 16px;
     }
   }
 }
@@ -2058,26 +2077,152 @@ footer a:hover {
 
 #core-pricing {
   background-color: var(--color-background-dark);
+  padding: clamp(64px, 54.8571px + 2.8571vw, 96px) var(--site-margins);
+
+  img {
+    max-width: 33%;
+    margin-bottom: var(--sizing-sm);
+  }
+
+  h2 {
+    color: var(--color-background-white);
+    text-align: center;
+  }
+
+  & h3 + p {
+    margin-top: var(--sizing-sm);
+    margin-bottom: var(--sizing-lg);
+  }
+
+  p {
+    text-align: center;
+  }
+
+  ul {
+    border-top: solid 1px #22384755;
+    border-bottom: solid 1px #22384755;
+    padding: var(--sizing-sm) 0;
+    margin: auto 0 var(--sizing-md) 0;
+    
+    li {
+      list-style-type: "\2713";
+      opacity: 80%;
+      margin: var(--sizing-xxs) 0;
+      margin-left: var(--sizing-sm);
+      padding-left: var(--sizing-xxs);
+    }
+  }
+  
 
   & > div {
     gap: 16px;
+
+    & > div:last-child {
+      h3 {
+        background-color: var(--color-background-white);
+        padding: var(--sizing-md) var(--sizing-sm);
+        border-radius: var(--border-radius-md);
+        border-left: solid 16px var(--color-accent);
+        border-right: solid 16px var(--color-accent);
+        box-shadow: var(--box-shadow);
+        text-align: center;
+      }
+    }
   }
 
   & > div > div:not(:first-child) {
     gap: 32px;
+    margin: var(--sizing-lg) 0;
+    
 
     & > div {
       background-color: var(--color-background-white);
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--box-shadow);
       padding: var(--sizing-md);
-    }
-  }
+      width: 33%;
 
-  li {
-    margin: var(--sizing-xxs) 0;
+      > p {
+        opacity: 80%;
+      }
+
+      > p:last-child {
+        margin-top: var(--sizing-md);
+        /* font-family: var(--font-primary); */
+        font-weight: 500;
+        font-size: 1.25rem;
+      }
+    }
   }
 
   .price {
     margin-top: auto;
-    padding: var(--sizing-lg) 0;
+    padding: var(--sizing-xsm);
+    background-color: #ebbc5244;
+    border-radius: var(--border-radius-md);
+    align-self: stretch;
+
+
+    p:first-child {
+      font-size: 1.5rem;
+      
+
+      span {
+        font-weight: 700;
+        font-family: var(--font-primary);
+      }
+    }
+
+    & p:last-child {
+      margin-top: 0;
+      border: dotted 2px var(--color-accent);
+      background-color: hsla(42, 89%, 42%, 0.133);
+      border-radius: var(--border-radius-sm);
+
+      span {
+        display: block;
+        font-size: 1rem;
+        font-weight: 700;
+        opacity: 80%;
+      }
+
+      strong {
+        font-weight: 500;
+        font-family: var(--font-primary);
+      }
+    }
+  }
+
+  
+}
+
+@media screen and (max-width: 1000px) {
+  #core-pricing {
+    & > div > div:not(:first-child) {
+      flex-direction: column;
+      align-items: stretch;
+
+      > div {
+        width: auto;
+        max-width: 400px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  #core-pricing {
+    padding-left: 0;
+    padding-right: 0;
+
+  & > div {
+    & > div:last-child {
+        margin-top: 0;
+        h3 {
+          border-radius: 0;
+
+        }
+      }
+    }
   }
 }

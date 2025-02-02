@@ -244,6 +244,65 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch((error) => console.error("Error injecting benefits.html:", error));
     }
+
+    const corePricing = document.getElementById("core-pricing");
+    if (corePricing) {
+        fetch(getRelativePath("components/core-pricing.html"))
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load core-pricing.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                corePricing.innerHTML = html;
+                adjustPaths(corePricing);
+            })
+            .catch((error) => console.error("Error injecting core-pricing.html:", error));
+    }
+
+    const reviewsSection = document.getElementById("reviews-section");
+
+    // Fetch the carousel content from reviews.html
+    if (reviewsSection) {
+        fetch(getRelativePath("components/reviews.html"))
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load reviews.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                // Inject the carousel HTML into the placeholder
+                reviewsSection.innerHTML = html;
+
+                // Add JavaScript functionality for carousel navigation
+                // initializeCarousel();
+            })
+            .catch((error) => {
+                console.error("Error loading reviews.html:", error);
+            });
+    }
+
+    const faq = document.getElementById('faq');
+
+    if (faq) {
+        fetch(getRelativePath("components/faq.html"))
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load faq.html");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                faq.innerHTML = html;
+    
+                toggleFAQ();
+            })
+            .catch((error) => {
+                console.error("Error loading faq.html:", error);
+            })
+    }
 });
 
 
@@ -563,55 +622,7 @@ if (originalPoly) {
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Target the placeholder for the carousel
-    const reviewsSection = document.getElementById("reviews-section");
 
-    // Fetch the carousel content from reviews.html
-    if (reviewsSection) {
-        fetch("components/reviews.html")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to load reviews.html");
-                }
-                return response.text();
-            })
-            .then((html) => {
-                // Inject the carousel HTML into the placeholder
-                reviewsSection.innerHTML = html;
-
-                // Add JavaScript functionality for carousel navigation
-                // initializeCarousel();
-            })
-            .catch((error) => {
-                console.error("Error loading reviews.html:", error);
-            });
-        }
-});
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const faq = document.getElementById('faq');
-
-    if (faq) {
-        fetch("components/faq.html")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to load faq.html");
-                }
-                return response.text();
-            })
-            .then((html) => {
-                faq.innerHTML = html;
-    
-                toggleFAQ();
-            })
-            .catch((error) => {
-                console.error("Error loading faq.html:", error);
-            })
-    }
-})
 
 
 function toggleFAQ() {
