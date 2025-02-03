@@ -15,12 +15,13 @@
 
     <link rel="canonical" href="/index.html">
 
-    <script rel="preload" defer src="script.js"></script>
+    <script rel="preload" defer src="script.js" as="script"></script>
 
-    <link rel="preload" href="/assets/images/heroImage_noBG.png" as="image" type="image">
+    <link rel="preload" href="/assets/images/heroImage_noBG.png" as="image" type="image/png" media="(min-width: 501px)">
+    <link rel="preload" href="/assets/images/heroImage_noBG_500px.png" as="image" type="image/png" media="(max-width: 500px)">
     
     <link rel="preload" href="/assets/fonts/Prompt-Font/Prompt-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="/assets/fonts/Domine-Font/Domine-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Domine-Font/Domine-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="preload" href="/assets/fonts/NovaFlat-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     
     <link rel="stylesheet" href="styles.css">
@@ -67,7 +68,7 @@
                 <div class="item2">
                     <img src="assets/images/heroImage_noBG.png" 
                     srcset="assets/images/heroImage_noBG.png 1000w, assets/images/heroImage_noBG_500px.png 500w"
-                    sizes="(max-width: 500px) 500px, 777px"
+                    sizes="(max-width: 500px) 500px"
                     alt="Hauptbild des XPAYTAX Accounting Logos mit Icons in isometrischem Stil"
                     width="1000"
                     height="1000"
