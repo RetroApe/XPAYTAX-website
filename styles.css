@@ -68,6 +68,7 @@ body {
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
+  width: 100%;
 }
 
 /* 6. Inherit fonts for form controls */
@@ -1488,6 +1489,8 @@ footer a:hover {
 
 .contact-footer img {
   margin-right: var(--sizing-sm);
+  width: unset;
+
 }
 
 .social-footer p {
