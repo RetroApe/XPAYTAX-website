@@ -41,6 +41,9 @@ function adjustPaths(container) {
 }
 
 
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // Load navigation
@@ -150,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-
             // LANGUAGE SWITCHING
 
             const englishLink = document.getElementById("english-link");
@@ -194,6 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
             adjustPaths(document.getElementById('footer'));
         });
 });    
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
 

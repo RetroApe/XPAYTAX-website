@@ -100,6 +100,7 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+
 p {
     font-family: var(--font-secondary);
     /* font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem); */
@@ -385,7 +386,7 @@ nav a.cta {
       width: 20px;
       height: 20px;
       align-self: center; 
-      transition: transform 300ms;
+      transition: transform 400ms;
     }
   }
 }
@@ -421,7 +422,7 @@ nav a.cta {
   z-index: 5;
   pointer-events: all;
 
-  transition: all 600ms 100ms;
+  transition: all 400ms;
 }
 
 /* Show dropdown on hover */
@@ -444,13 +445,13 @@ nav a.cta {
   width: 50px;
   height: 50px;
   border-radius: var(--border-radius-md);
-  border: solid 2px var(--color-accent2);
-  box-shadow: inset 0 0 4px var(--color-accent2);
+  border: solid 2px var(--color-accent);
+  box-shadow: inset 0 0 4px var(--color-accent);
   background-color: unset;
 
   position: absolute;
   right: 10%;
-  top: 18px;
+  top: 8px;
   /* bottom: 50%; */
   /* transform: translateY(50%); */
   z-index: 10;
@@ -466,7 +467,7 @@ nav a.cta {
   &:has(+ .dropdown-show) {
     border: solid 1px var(--color-text-muted);
     box-shadow: inset 0 0 2px var(--color-text-muted);
-    background-color: var(--color-accent2);
+    background-color: var(--color-accent);
 
     svg{
       transform: scaleY(-1);
@@ -493,7 +494,7 @@ nav a.cta {
   }
 
   .dropdown > a {
-    height: 92px !important;
+    height: 68px !important;
 
     & > div svg {
       display: none;
@@ -516,8 +517,6 @@ nav a.cta {
     height: 100%;
   }
 
-  
-
   .dropdown-menu {
     display: flex;
     flex-direction: column;
@@ -528,7 +527,7 @@ nav a.cta {
     height: auto;
 
     & a {
-      font-size: 1.25rem;
+      font-size: 1.25rem !important;
     }
   }
 
@@ -553,7 +552,7 @@ nav a.cta {
       width: 100%;
       height: 100%;
       margin: 0;
-      padding-left: var(--sizing-md);
+      padding: var(--border-radius-lg) var(--sizing-md);
     }
   }
 
@@ -1085,6 +1084,8 @@ h3 + ul {
     max-width: 100%;
     min-width: 100%;
     font-family: var(--font-secondary);
+    min-height: 200px;
+
   }
 }
 
@@ -1290,7 +1291,7 @@ input:focus-visible, textarea:focus-visible {
   }
 
   & p {
-    font-size: 0.865rem;
+    font-size: 0.9375rem;
     opacity: 80%;
     margin-left: clamp(24px, 20.5714px + 1.0714vw, 36px);
     margin-top: 4px;
