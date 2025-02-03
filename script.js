@@ -8,7 +8,7 @@ console.log(window.location.pathname.split('/').filter(Boolean));
 
 function getRelativePath(filePath) {
     const pathSegments = window.location.pathname.split('/').filter(Boolean); // Remove empty segments
-    let depth = pathSegments.length - 2; // Subtract 2 to exclude the filename
+    let depth = pathSegments.length - 1; // Subtract 2 to exclude the filename
 
     // Check if the site is in the English version
     if (pathSegments[1] === 'en') {
