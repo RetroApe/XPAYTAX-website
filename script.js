@@ -11,7 +11,7 @@ function getRelativePath(filePath) {
     let depth = pathSegments.length - 1; // Subtract 2 to exclude the filename
 
     // Check if the site is in the English version
-    if (pathSegments[1] === 'en') {
+    if (pathSegments[0] === 'en') {
         depth--; 
     }
 
