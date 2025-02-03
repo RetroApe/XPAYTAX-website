@@ -865,6 +865,10 @@ nav a.cta {
 .img-wrap {
   align-self: center;
   max-width: clamp(300px, -200.0000px + 55.5556vw, 600px);
+
+  img {
+    height: 100%;
+  }
 }
 
 
