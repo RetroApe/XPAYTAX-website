@@ -723,6 +723,7 @@ nav a.cta {
     margin-bottom: clamp(3rem, -0.3333rem + 5.9259vw, 5rem);
     padding-right: clamp(50px, 7.1429px + 13.3929vw, 200px);
     max-width: 60ch;
+    font-weight: 900;
 }
 
 #hero img {
