@@ -4,8 +4,6 @@ var navList;
 var openButton;
 var navLinks;
 
-console.log(window.location.pathname.split('/').filter(Boolean));
-
 function getRelativePath(filePath) {
     const pathSegments = window.location.pathname.split('/').filter(Boolean); // Remove empty segments
     let depth = pathSegments.length - 1; // Subtract 2 to exclude the filename
@@ -48,8 +46,6 @@ function loadRecaptcha() {
         script.async = true;
         script.defer = true;
         document.body.appendChild(script);
-
-        console.log("ReCaptcha loading");
     }
 }
 
@@ -172,26 +168,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const englishLink = document.getElementById("english-link");
             const germanLink = document.getElementById("german-link");
 
-            // Detect base path dynamically (for local & live)
-            const pathParts = window.location.pathname.split("/").filter(Boolean);
-            const isLocal = window.location.hostname === "localhost";
-            const basePath = isLocal ? `/${pathParts[0]}` : "";
-
-            // Get the relative path (excluding basePath)
-            const currentPath = window.location.pathname.replace(basePath, "");
-
-            console.log("Detected basePath:", basePath);
-            console.log("Relative Path:", currentPath);
+            const basePath = window.location.pathname;
 
             // Check if the current URL is in English or German
-            if (currentPath.startsWith("/en")) {
+            if (basePath.startsWith("/en")) {
                 // Switch to German by removing "/en"
-                germanLink.href = basePath + currentPath.replace("/en", "");
-                englishLink.href = basePath + currentPath; // English stays the same
+                germanLink.href = basePath.replace("/en", "");
+                englishLink.href = basePath; // English stays the same
             } else {
                 // Switch to English by adding "/en"
-                englishLink.href = basePath + "/en" + currentPath;
-                germanLink.href = basePath + currentPath; // German stays the same
+                englishLink.href = "/en" + basePath;
+                germanLink.href = basePath; // German stays the same
             }
 
             // Attach the function to the resize event and run it initially
