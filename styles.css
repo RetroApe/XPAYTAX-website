@@ -194,7 +194,7 @@ p {
 
 h1 {
   font-size: clamp(2rem, 1.5000rem + 2.5000vw, 3.75rem);
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   line-height: 110%;
   margin-bottom: 24px;
   padding-right: clamp(2rem, 1.4286rem + 2.8571vw, 4rem);
@@ -210,7 +210,7 @@ h2 {
   font-style: var(--font-primary);
   font-size: clamp(1.5rem, 1.2143rem + 1.4286vw, 2.5rem);
   line-height: 1.3;
-  letter-spacing: 0px;
+  letter-spacing: 1px;
 }
 
 h3 {
@@ -1069,6 +1069,10 @@ h3 + ul {
 }
 
 @media screen and (max-width: 600px) {
+  #services {
+    gap: 8px;
+  }
+
   #services .flex {
     flex-direction: column;
   }
@@ -1080,6 +1084,10 @@ h3 + ul {
 
   #services h3 {
     text-align: center;
+  }
+
+  #services ul {
+    padding-left: 10%;
   }
 }
 
@@ -1373,11 +1381,15 @@ input:focus-visible, textarea:focus-visible {
   }
 
   & label a {
-    color: var(--color-accent2);
     font-size: inherit;
 
     &:hover {
     color: var(--color-accent);
+    }
+
+    &::after {
+      content: url(/assets/icons/link.svg);
+      margin-left: 4px;
     }
   }
 
@@ -1709,7 +1721,14 @@ footer a:hover {
 
   & img {
     clip-path: polygon(100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%, 25% 6.7%, 75% 6.7%);
-    
+  }
+
+  .grid-item p:last-child {
+    font-style: italic;
+
+    &::after, &::before {
+      content: '"';
+    }
   }
 }
 
@@ -1767,10 +1786,11 @@ footer a:hover {
   margin-bottom: 10px;
 }
 
-.client-info h4 {
+.client-info p {
   margin: 5px 0;
+  font-family: var(--font-primary);
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 @media screen and (max-width: 900px) {
@@ -2033,7 +2053,7 @@ footer a:hover {
 
 .tooltip {
   position: absolute;
-  right: -8px;
+  right: 0px;
   top: 0;
   width: 30px;
   height: 30px;
@@ -2047,7 +2067,7 @@ footer a:hover {
 @media screen and (max-width: 600px) {
   .tooltip {
     top: -100px;
-    right: 5%;
+    right: 7%;
   }
 }
 
@@ -2057,7 +2077,7 @@ footer a:hover {
   color: var(--color-text);
   background-color: var(--color-accent);
   font-family: var(--font-primary);
-  font-size: clamp(0.625rem, 0.5529rem + 0.2885vw, 0.8125rem);
+  font-size: 0.8125rem;
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
