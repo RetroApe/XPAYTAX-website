@@ -40,6 +40,20 @@ function adjustPaths(container) {
     });
 }
 
+function loadRecaptcha() {
+    if (!document.getElementById("recaptcha-script")) {
+        let script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js?render=6Lc6lL8qAAAAAHqqPRQ1JaNi4UYSWXE5hsfNmO2m";
+        script.id = "recaptcha-script";
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+
+        console.log("ReCaptcha loading");
+    }
+}
+
+
 
 
 
@@ -365,7 +379,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 // console.log(form.getAttribute('action'));
                 // form.setAttribute('action', getRelativePath(form.getAttribute('action')));
                 // console.log(form.getAttribute('action'));
-                
+
+                if ("IntersectionObserver" in window) {
+                    let observer = new IntersectionObserver((entries, observer) => {
+                        if (entries[0].isIntersecting) {
+                            loadRecaptcha();
+                            observer.disconnect(); // Stop observing after loading once
+                        }
+                    });
+            
+                    observer.observe(form);
+                }
+            
+                // Fallback: Load reCAPTCHA when the user interacts with the form
+                form.addEventListener("focusin", loadRecaptcha, { once: true });
 
                 // Function to validate email
                 function isValidEmail(email) {
