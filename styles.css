@@ -135,6 +135,9 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 p {
     font-family: var(--font-secondary);
@@ -1051,6 +1054,7 @@ h3 + ul {
   & img {
     max-width: clamp(64px, 45.7143px + 5.7143vw, 128px);
     margin-bottom: var(--sizing-md);
+    height: auto;
   }
 
   & h3 {

@@ -49,6 +49,46 @@ function loadRecaptcha() {
     }
 }
 
+function handleAnchorClick(event, anchor) {
+    const href = anchor.getAttribute("href");
+    const anchorIndex = href.indexOf("#");
+
+    if (anchorIndex !== -1) {
+        const anchorId = href.substring(anchorIndex + 1);
+        const targetElement = document.getElementById(anchorId);
+
+        // ✅ If anchor exists on the page, let default behavior occur
+        if (targetElement) {
+            return;
+        }
+
+        // ❌ Otherwise, prevent default and store the anchor
+        event.preventDefault();
+        sessionStorage.setItem("pendingAnchor", anchorId);
+
+        // Redirect to the page WITHOUT the anchor
+        const baseUrl = href.substring(0, anchorIndex);
+        window.location.href = baseUrl;
+    }
+}
+
+
+function checkStoredAnchor() {
+    const anchorId = sessionStorage.getItem("pendingAnchor");
+
+    if (anchorId) {
+        sessionStorage.removeItem("pendingAnchor"); // Remove it to prevent repeat scrolling
+
+        requestAnimationFrame(() => {
+            const targetElement = document.getElementById(anchorId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                history.pushState(null, null, `#${anchorId}`); // Update URL with anchor
+            }
+        });
+    }
+}
+
 
 
 
@@ -162,6 +202,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
+            document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+                anchor.addEventListener("click", (event) => handleAnchorClick(event, anchor));
+            });
+
 
             // LANGUAGE SWITCHING
 
@@ -262,6 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then((html) => {
                 corePricing.innerHTML = html;
                 adjustPaths(corePricing);
+                checkStoredAnchor();
             })
             .catch((error) => console.error("Error injecting core-pricing.html:", error));
     }
@@ -657,8 +702,7 @@ function toggleFAQ() {
 }
 
 
-
-
+    
 
 var width1 = 1440;
 var width2 = 320;
